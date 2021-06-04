@@ -1,5 +1,9 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.security.UserPrincipal;
+import cu.edu.cujae.pweb.utils.JsfUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.IOException;
 
 import javax.faces.bean.ManagedBean;
@@ -11,6 +15,9 @@ public class UserBean {
 	
 	private String username;
 	private String password;
+
+	@Autowired
+	private AuthService authService;
 	
 	public UserBean() {
 		// TODO Auto-generated constructor stub
@@ -48,4 +55,20 @@ public class UserBean {
 	protected FacesContext getFacesContext() {
 	    return FacesContext.getCurrentInstance();
 	}
+
+	public String login() {
+
+		try {
+			UserAuthenticatedDto userAuthenticated = authService.login(username, password);
+			UserDetails userDetails = UserPrincipal.create(userAuthenticated);
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		} catch (Exception e) {
+			JsfUtils.addMessageFromBundle("securityMessages", FacesMessage.SEVERITY_INFO, "message_invalid_credentials");
+			return null;
+		}
+		return "login";
+	}
+
 }
