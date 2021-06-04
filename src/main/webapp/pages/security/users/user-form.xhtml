@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Usuario" showEffect="fade" modal="true"
+              widgetVar="manageUserDialog" responsive="true">
+        <p:outputPanel id="manage-user-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty manageUserBean.selectedUser}">
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+                        
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Usuario</p:outputLabel>
+                            <p:inputText id="username" required="true"
+                                         disabled="#{not empty manageUserBean.selectedUser.id}"
+                                         value="#{manageUserBean.selectedUser.user}"/>
+                            <p:message for="@previous"></p:message>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Roles</p:outputLabel>
+                            <p:selectOneButton required="true"
+                                               label="Seleccione"
+                                               style="min-width: 15rem"
+                                               panelStyle="width: 30rem"
+                                               value="#{manageUserBean.selectedUser.rol}">
+                                <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+                                <f:selectItem itemLabel="Usuario" itemValue="Usuario"/>
+                            </p:selectOneButton>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel  for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                            <p:password id="password1" required="true" match="password2"
+                                        rendered="#{empty manageUserBean.selectedUser.id}"
+                                        value="#{ manageUserBean.selectedUser.password}"
+                                        >
+                            </p:password>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        
+                        <div class="p-field" >
+                            <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                            <p:password id="password2" required="true"
+                                        rendered="#{empty manageUserBean.selectedUser.id}"
+                                        value="#{manageUserBean.selectedUser.password}"
+                                        >
+                            </p:password>
+                            <p:message for="@previous"  rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                        </div>
+                    
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageUserBean.saveUser}"
+                             update="manage-user-content" process="manage-user-content @this"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageUserDialog').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>

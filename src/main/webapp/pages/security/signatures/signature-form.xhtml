@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Asignatura" showEffect="fade" modal="true"
+              widgetVar="manageSignatureDialog" responsive="true">
+        <p:outputPanel id="manage-signatures-content" class="ui-fluid">
+            <p:outputPanel
+                rendered="#{not empty manageSignatureBean.selectedsignature}">
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Nombre de la Asignatura</p:outputLabel>
+                            <p:inputText id="name" required="true"
+                                         value="#{manageSignatureBean.selectedsignature.name}"/>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Horas</p:outputLabel>
+                            <p:inputNumber id="hours" required="true"
+                                           value="#{manageSignatureBean.selectedsignature.hours}"/>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Año</p:outputLabel>
+                            <p:selectOneMenu id="year" required="true"
+                                             value="#{manageSignatureBean.selectedsignature.year}">
+                                <p:keyFilter mask="num"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="1ro" itemValue="1"/>
+                                <f:selectItem itemLabel="2do" itemValue="2"/>
+                                <f:selectItem itemLabel="3ro" itemValue="3"/>
+                                <f:selectItem itemLabel="4to" itemValue="4"/>
+                                <f:selectItem itemLabel="5to" itemValue="5"/>
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Curso</p:outputLabel>
+                            <p:inputText id="curse" required="true"
+                                         value="#{manageSignatureBean.selectedsignature.curse}">
+                            </p:inputText>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageSignatureBean.saveSignature}"
+                             update="manage-signatures-content" process="manage-signatures-content @this"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageSignatureDialog').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>

@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Listado de Usuarios
+    </ui:define>
+    <ui:define name="layout">
+        <h:form id="form">
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Nuevo Usuario" icon="pi pi-plus"
+                                         actionListener="#{manageUserBean.openNew}"
+                                         update=":form:manage-user-content"
+                                         oncomplete="PF('manageUserDialog').show()"
+                                         styleClass="ui-button-success"
+                                         style="margin-right: .5rem">
+                            <p:resetInput target=":form:manage-user-content"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-users" fileName="users"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+                <p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
+                             reflow="true" paginator="true"
+                             value="#{manageUserBean.users}"
+                             rows="10" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Usuarios</span>
+                            <span
+                                    class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtUsers').filter()" placeholder="Buscar"/>
+							</span>
+
+                        </div>
+                    </f:facet>
+
+
+                    <p:column headerText="Usuario" sortBy="#{user.user}" filterBy="#{user.user}">
+                        <h:outputText value="#{user.user}"/>
+                    </p:column>
+                    <p:column headerText="Rol" sortBy="#{user.rol}">
+                        <h:outputText value="#{user.rol}"/>
+                    </p:column>
+
+                    <p:column exportable="false">
+                        <p:commandButton icon="pi pi-pencil"
+                                         action="#{manageUserBean.openForEdit}"
+                                         update=":form:manage-user-content"
+                                         oncomplete="PF('manageUserDialog').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{user}"
+                                                         target="#{manageUserBean.selectedUser}"/>
+                            <p:resetInput target=":form:manage-user-content"/>
+                        </p:commandButton>
+
+                        <p:commandButton class="ui-button-warning rounded-button"
+                                         icon="pi pi-trash" process="@this"
+                                         action="#{manageUserBean.deleteUser}">
+
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+                <ui:include src="user-form.xhtml"></ui:include>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

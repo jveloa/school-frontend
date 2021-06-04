@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+		    Sistema de Gestion
+		</ui:define>
+    	<ui:define name="layout">
+    		<h:form>
+		    	<p:card style="width: 100%; margin-bottom: 2em">
+				    <f:facet name="title">
+				        Descripcion del proyecto
+				    </f:facet>
+				
+				    <p>
+						Problema a resolver:
+						En los centros estudiantiles se desea automatizar el control de los resultados docentes alcanzados por los alumnos, así como la actualización de la matrícula y otras informaciones necesarias para controlar la docencia.
+						De los alumnos se conocen su código, nombres y apellidos, sexo y municipio de residencia. Un alumno puede ser promovido al año inmediato superior (si aprobó todas las asignaturas del año que termina); repitente (si tiene una o más asignaturas desaprobadas) o baja, en tal caso se almacena la causa de la baja (enfermedad; traslado; culminación de los estudios; desaprobar por segunda vez un año, para lo cual basta con que desapruebe una asignatura). Un grupo está formado por varios alumnos y un alumno pertenece a solo un grupo. Un grupo está identificado por el año y su número (puede repetirse para años diferentes pero es único en un mismo año). Para los alumnos de cada grupo se conocen los promedios (anual o acumulado).
+						De cada año se conoce el año y el curso escolar (Ejemplo: 2010-2011). En un mismo año se imparten varias asignaturas y una asignatura dada pertenece a un solo año. De las asignaturas se tiene el nombre de la asignatura y la cantidad de horas planificadas. Se conocen las evaluaciones (Excelente, Bien, Aprobado, Desaprobado) obtenidas por grupo en cada asignatura. Dado un año y cada grupo de ese año, se obtiene el escalafón del año.
+						 </p>
+				</p:card>
+			</h:form>
+    	</ui:define>
+    </ui:composition>
+</html>

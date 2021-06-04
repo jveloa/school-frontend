@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Estudiantes" showEffect="fade" modal="true"
+              widgetVar="manageEstudiantesDialog" responsive="true">
+        <p:outputPanel id="manage-estudiantes-content" class="ui-fluid" >
+            <p:outputPanel rendered="#{not empty manageEstudiantesBean.selectedEstudiantes}" >
+                <p:panelGrid layout="grid" columns="1"  >
+                    <h:panelGroup >
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Nombre y Apellidos</p:outputLabel>
+                            <p:inputText id="name" required="true"
+                                         value="#{manageEstudiantesBean.selectedEstudiantes.nombre}"/>
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">CI</p:outputLabel>
+                            <p:inputText id="CI" required="true"
+                                         value="#{manageEstudiantesBean.selectedEstudiantes.id}"
+                                         maxlength="11"/>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Sexo</p:outputLabel>
+                            <p:selectOneMenu id="sexo" required="true"
+                                         value="#{manageEstudiantesBean.selectedEstudiantes.sexo}"
+                                         >
+                                <p:keyFilter mask="num" />
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Grupo</p:outputLabel>
+                            <p:selectOneMenu id="grupo" required="true"
+                                         value="#{manageEstudiantesBean.selectedEstudiantes.grupo}"
+                                         validatorMessage="Grupo incorrecto">/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="G-11" itemValue="11"/>
+                                <f:selectItem itemLabel="G-12" itemValue="12"/>
+                                <f:selectItem itemLabel="G-13" itemValue="13"/>
+                                <f:selectItem itemLabel="G-21" itemValue="21"/>
+                                <f:selectItem itemLabel="G-22" itemValue="22"/>
+                                <f:selectItem itemLabel="G-23" itemValue="23"/>
+                                <f:selectItem itemLabel="G-31" itemValue="31"/>
+                                <f:selectItem itemLabel="G-32" itemValue="32"/>
+                                <f:selectItem itemLabel="G-33" itemValue="33"/>
+                                <f:selectItem itemLabel="G-41" itemValue="41"/>
+                                <f:selectItem itemLabel="G-42" itemValue="42"/>
+                                <f:selectItem itemLabel="G-43" itemValue="43"/>
+                                <f:selectItem itemLabel="G-51" itemValue="51"/>
+                                <f:selectItem itemLabel="G-52" itemValue="52"/>
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Municipio</p:outputLabel>
+                            <p:selectOneMenu id="municipio" required="true"
+                                         value="#{manageEstudiantesBean.selectedEstudiantes.municipio}"
+                                         validatorMessage="Seleccione un municipio">/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="Playa" itemValue="Playa"/>
+                                <f:selectItem itemLabel="Vedado" itemValue="Vedado"/>
+                                <f:selectItem itemLabel="Regla" itemValue="Regla"/>
+                                <f:selectItem itemLabel="Marianao" itemValue="Marianao"/>
+                                <f:selectItem itemLabel="La Lisa" itemValue="La Lisa"/>
+                                <f:selectItem itemLabel="Cotorro" itemValue="Cotorro"/>
+                                <f:selectItem itemLabel="H.Vieja" itemValue="H.Vieja"/>
+                                <f:selectItem itemLabel="C.Habana" itemValue="C.Habana"/>
+                                <f:selectItem itemLabel="Guanabacoa" itemValue="Guanabacoa"/>
+                                <f:selectItem itemLabel="10 de Oct" itemValue="10 de Oct"/>
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                    </h:panelGroup>
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageEstudiantesBean.saveEstudiantes}"
+                             update="manage-estudiantes-content" process="manage-estudiantes-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageEstudiantesDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>

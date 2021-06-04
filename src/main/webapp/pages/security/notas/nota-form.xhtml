@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Nota" showEffect="fade" modal="true"
+              widgetVar="manageNotaDialog" responsive="true">
+        <p:outputPanel id="manage-nota-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty manageNotaBean.selectedNota}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Asignatura</p:outputLabel>
+                            <p:inputText id="name" required="true"
+                                         value="#{manageNotaBean.selectedNota.codigo_asignatura}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Roles</p:outputLabel>
+                            <p:selectOneMenu id="multiple" required="true"
+                                             value="#{manageNotaBean.notas}" label="Seleccione"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageNotaBean.notasValores}" var="nota"
+                                               itemLabel="#{nota}" itemValue="#{nota}" />
+                            </p:selectOneMenu>
+                        </div>
+
+
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageNotaBean.saveNota}"
+                             update="manage-nota-content" process="manage-nota-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageNotaDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>

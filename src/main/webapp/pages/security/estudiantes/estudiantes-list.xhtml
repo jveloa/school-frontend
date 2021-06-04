@@ -1,0 +1,114 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Listado de Estudiantes
+    </ui:define>
+    <ui:define name="layout">
+        <h:form id="form">
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+
+                        <p:commandButton value="Nuevo Estudiante" icon="pi pi-plus"
+                                         actionListener="#{manageEstudiantesBean.openNew}"
+                                         update=":form:manage-estudiantes-content"
+                                         oncomplete="PF('manageEstudiantesDialog').show()"
+                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                            <p:resetInput target=":form:manage-estudiantes-content"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-estudiantes" fileName="estudiantes"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:dataTable id="dt-estudiantes" widgetVar="dtEstudiantes" var="estudiantes"
+                             value="#{manageEstudiantesBean.estudiantes}" reflow="true" paginator="true"
+                             rows="10" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Estudiantes</span> <span
+                                class="filter-container ui-input-icon-left"> <i
+                                class="pi pi-search"></i> <p:inputText id="globalFilter"
+                                                                       onkeyup="PF('dtEstudiantes').filter()"
+                                                                       placeholder="Buscar"/>
+							</span>
+
+                        </div>
+                    </f:facet>
+
+
+                    <p:column headerText="Nombre y Apelidos" sortBy="#{estudiantes.nombre}"
+                              filterBy="#{estudiantes.nombre}">
+                        <h:outputText value="#{estudiantes.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Ci" sortBy="#{estudiantes.id}"
+                              filterBy="#{estudiantes.id}">
+                        <h:outputText value="#{estudiantes.id}"/>
+                    </p:column>
+                    <p:column headerText="Grupo" sortBy="#{estudiantes.grupo}">
+                        <h:outputText value="#{estudiantes.grupo}"/>
+                    </p:column>
+                    <p:column headerText="Sexo" sortBy="#{estudiantes.sexo}"
+                              filterBy="#{estudiantes.sexo}">
+                        <h:outputText value="#{estudiantes.sexo}"/>
+                    </p:column>
+                    <p:column headerText="Municipio" sortBy="#{estudiantes.municipio}"
+                              filterBy="#{estudiantes.municipio}">
+                        <h:outputText value="#{estudiantes.municipio}"/>
+                    </p:column>
+
+                    <p:column exportable="false">
+
+                        <p:commandButton icon="pi pi-pencil" action="#{manageEstudiantesBean.openForEdit}"
+                                         update=":form:manage-estudiantes-content"
+                                         oncomplete="PF('manageEstudiantesDialog').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{estudiantes}"
+                                                         target="#{manageEstudiantesBean.selectedEstudiantes}"/>
+                            <p:resetInput target=":form:manage-estudiantes-content"/>
+                        </p:commandButton>
+
+                        <p:commandButton class="ui-button-warning rounded-button"
+                                         icon="pi pi-trash" process="@this"
+                                         action="#{manageEstudiantesBean.deleteEstudiantes}">
+                            <f:setPropertyActionListener value="#{estudiantes}"
+                                                         target="#{manageEstudiantesBean.selectedEstudiantes}"/>
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar al estudiante?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+
+                        
+                            <h:link style="margin-right: .5rem; background: #2196F3;margin-top: .5rem; float: left;
+                         padding: 5px; color: white; border-radius: 5px;" outcome="/pages/security/notas/nota-list.xhtml" >
+                                Ver Notas
+                            </h:link>
+                       
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <ui:include src="estudiantes-form.xhtml"></ui:include>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

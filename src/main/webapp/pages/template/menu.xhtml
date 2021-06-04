@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="layout-sidebar">
+        <div class="layout-menu">
+                <div class="menu-category">Administración</div>
+                <div class="menu-items">
+                    <h:link outcome="/pages/security/users/user-list.xhtml">
+                        Usuarios
+                    </h:link>
+                    <h:link outcome="/pages/security/estudiantes/estudiantes-list.xhtml">
+                        Estudiantes
+                    </h:link>
+                    <h:link outcome="/pages/security/signatures/signature-list.xhtml">
+                        Asignaturas
+                    </h:link>
+                </div>
+
+        </div>
+    </div>
+
+</ui:composition>
