@@ -25,10 +25,10 @@ public class ManageSignatureBean {
     public ManageSignatureBean() {
     }
 
-    @PostConstruct
+   /* @PostConstruct
     public void init() {
         signatures = signatures == null ? signatureService.getSignatures() : signatures;
-    }
+    }*/
 
     public List<SignatureDto> getSignatures() {
         return signatures;

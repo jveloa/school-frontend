@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
 import cu.edu.cujae.pweb.dto.UserDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.security.UserPrincipal;
 import cu.edu.cujae.pweb.service.AuthService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
@@ -17,7 +18,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Component
 @ManagedBean
@@ -69,6 +72,27 @@ public class UserBean {
 			return null;
 		}
 		return "login";
+	}
+	public String logout() {
+		return dispatchToUrl("/logout");
+	}
+
+	public String getUserLogued() {
+		return CurrentUserUtils.getUsername();
+	}
+
+	private String dispatchToUrl(String url) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		try {
+			dispatcher.forward(request, response);
+			facesContext.responseComplete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

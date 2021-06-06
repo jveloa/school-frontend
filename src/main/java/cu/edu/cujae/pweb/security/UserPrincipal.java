@@ -51,6 +51,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(UserAuthenticatedDto user, Map<String, Object> attributes) {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
+
         return userPrincipal;
     }
 

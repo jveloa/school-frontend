@@ -28,7 +28,7 @@ public class ManageNotaBean {
     @Autowired
     private NotaService notaService;
 
-    @PostConstruct
+    /*@PostConstruct
     public void init() {
         notasPrueba =notasPrueba == null ? notaService.getNotasTest() : notasPrueba;
         this.notasValores = new ArrayList<String>(){{
@@ -38,7 +38,7 @@ public class ManageNotaBean {
             add("5");
         }};
 
-    }
+    }*/
 
     public void openNew() {
         this.selectedNota = new NotaDto();

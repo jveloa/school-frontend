@@ -37,11 +37,11 @@ public class ManageEstudiantesBean {
     }
 
 
-    @PostConstruct
+   /* @PostConstruct
     public void init() {
         estudiantes = estudiantes == null ? estudiantesService.getEstudiantes(): estudiantes;
 
-    }
+    }*/
 
     public void openNew() {
         this.selectedEstudiantes = new EstudiantesDto();

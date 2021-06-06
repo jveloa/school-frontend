@@ -33,7 +33,6 @@ public class ManageUserBean {
     }*/
 
     public void openNew() {
-
         this.selectedUser = new UserDto();
      }
 
