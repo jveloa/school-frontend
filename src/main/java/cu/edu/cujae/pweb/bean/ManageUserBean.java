@@ -26,11 +26,11 @@ public class ManageUserBean {
 
     }
 
-    @PostConstruct
+   /* @PostConstruct
     public void init() {
         users = users == null ? usersService.getUsers() : users;
 
-    }
+    }*/
 
     public void openNew() {
 

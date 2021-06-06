@@ -15,14 +15,14 @@ import java.util.Map;
 
 
 public class UserPrincipal implements UserDetails {
-    private Long codUser;
+    private int codUser;
     private String username;
     private String password;
     private boolean active;
     private String token;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long codUser, String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(int codUser, String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
         this.codUser = codUser;
         this.username = username;
         this.password = password;
@@ -33,7 +33,7 @@ public class UserPrincipal implements UserDetails {
     public static UserPrincipal create(UserAuthenticatedDto user) {
         List<GrantedAuthority> authorities;
         try {
-            RoleDto role =new RoleDto( 1,user.getRol());
+            RoleDto role = user.getRole();
             authorities = AuthorityUtils.createAuthorityList(role.getNameRole());
         } catch (Exception e) {
             authorities = Collections.
@@ -41,7 +41,7 @@ public class UserPrincipal implements UserDetails {
 
         }
         return new UserPrincipal(
-                user.getId(),
+                user.getCodUser(),
                 user.getUsername(),
                 user.getPassword(),
                 true,
@@ -54,11 +54,11 @@ public class UserPrincipal implements UserDetails {
         return userPrincipal;
     }
 
-    public Long getCodUser() {
+    public int getCodUser() {
         return codUser;
     }
 
-    public void setCodUser(Long codUser) {
+    public void setCodUser(int codUser) {
         this.codUser = codUser;
     }
 

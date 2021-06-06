@@ -31,8 +31,8 @@ public class CurrentUserUtils {
 	
 
 	
-	public static Long getUserId() {
-		Long userId = null;
+	public static int getUserId() {
+		Integer userId = null ;
 		if (isLogged()) {
 			userId = ((UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCodUser();
 		}
