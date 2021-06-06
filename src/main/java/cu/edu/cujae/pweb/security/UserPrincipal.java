@@ -1,5 +1,7 @@
 package cu.edu.cujae.pweb.security;
 
+
+import cu.edu.cujae.pweb.dto.RoleDto;
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -10,51 +12,40 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 public class UserPrincipal implements UserDetails {
-    private String userId;
-    private String email;
+    private Long codUser;
+    private String username;
     private String password;
     private boolean active;
-    private String username;
-    private String fullName;
-    private String identification;
     private String token;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(String userId, String email, String password, boolean active, String identification, Collection<? extends GrantedAuthority> authorities, String token, String username, String fullName) {
-        this.userId = userId;
-        this.email = email;
+    public UserPrincipal(Long codUser, String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
+        this.codUser = codUser;
+        this.username = username;
         this.password = password;
         this.active = active;
         this.authorities = authorities;
-        this.identification = identification;
-        this.token = token;
-        this.username = username;
-        this.fullName = fullName;
     }
 
     public static UserPrincipal create(UserAuthenticatedDto user) {
-    	List<GrantedAuthority> authorities;
-    	try {
-    		Collection<String> roleNames = user.getRoles().stream().map(role -> role.getRoleName()).collect(Collectors.toList());
-    		authorities = AuthorityUtils.createAuthorityList(roleNames.toArray(new String[0]));
-		} catch (Exception e) {
-			authorities = Collections.
-	                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-			
-		}
-    	return new UserPrincipal(
+        List<GrantedAuthority> authorities;
+        try {
+            RoleDto role =new RoleDto( 1,user.getRol());
+            authorities = AuthorityUtils.createAuthorityList(role.getNameRole());
+        } catch (Exception e) {
+            authorities = Collections.
+                    singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+
+        }
+        return new UserPrincipal(
                 user.getId(),
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 true,
-                user.getIdentification(),
-                authorities,
-                user.getToken(),
-                user.getUsername(),
-                user.getFullName()
+                authorities
         );
     }
 
@@ -63,8 +54,42 @@ public class UserPrincipal implements UserDetails {
         return userPrincipal;
     }
 
-    public String getEmail() {
-        return email;
+    public Long getCodUser() {
+        return codUser;
+    }
+
+    public void setCodUser(Long codUser) {
+        this.codUser = codUser;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
@@ -102,35 +127,4 @@ public class UserPrincipal implements UserDetails {
         return authorities;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getIdentification() {
-		return identification;
-	}
-
-	public void setIdentification(String identification) {
-		this.identification = identification;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
 }

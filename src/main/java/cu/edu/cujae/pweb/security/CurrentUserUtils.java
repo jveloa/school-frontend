@@ -19,13 +19,7 @@ public class CurrentUserUtils {
 		return username;
 	}
 	
-	public static String getEmail() {
-		String email = null;
-		if (SecurityContextHolder.getContext().getAuthentication() != null) {
-			email = ((UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail();
-		}
-		return email;
-	}
+
 	
 	public static String getTokenBearer() {
 		String token = null;
@@ -35,18 +29,12 @@ public class CurrentUserUtils {
 		return token;
 	}
 	
-	public static String getFullName() {
-		String fullName = "Invitado";
-		if (isLogged()) {
-			fullName = ((UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFullName();
-		}
-		return fullName;
-	}
+
 	
-	public static String getUserId() {
-		String userId = null;
+	public static Long getUserId() {
+		Long userId = null;
 		if (isLogged()) {
-			userId = ((UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+			userId = ((UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCodUser();
 		}
 		return userId;
 	}

@@ -1,11 +1,18 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
+import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.security.UserPrincipal;
+import cu.edu.cujae.pweb.service.AuthService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,18 +42,7 @@ public class UserBean {
 		this.password = password;
 	}
 	
-	public String login() {
-		if(username.equalsIgnoreCase("admin") && password.equals("admin")) {
-			try {
-				getFacesContext().getExternalContext().redirect(getRequest().getContextPath() +
-					    "/pages/welcome/welcome.jsf");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return  null;
-	}
+
 	
 	protected HttpServletRequest getRequest() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
