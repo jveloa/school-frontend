@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // todas las solicitudes deben estar autenticadas excepto las que se definan en este code
         http.authorizeRequests().antMatchers("/javax.faces.resource/**", "/resources/**", "/pages/security/login.jsf", "/pages/errors/**")
         .permitAll()
-        .antMatchers("/pages/security/**").hasAnyAuthority("admin")
+        .antMatchers("/pages/security/**").hasAnyAuthority("administrador")
         .anyRequest().authenticated();
         
         // configurando el login
