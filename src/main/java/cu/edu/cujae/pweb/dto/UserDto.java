@@ -2,28 +2,36 @@ package cu.edu.cujae.pweb.dto;
 
 
 public class UserDto {
-    private Long id;
-	private String user;
-	private String password;
-	private String rol;
-	
-	public UserDto() {
-		super();
-	}
+    private int codUser;
+    private String username;
+    private String password;
+    private RoleDto role;
 
-    public UserDto(Long id,String user, String password, String rol) {
-	    this.id = id;
-        this.user = user;
+    public UserDto() {
+    }
+
+
+    public UserDto(int codUser, String username, String password, RoleDto role) {
+        this.codUser = codUser;
+        this.username = username;
         this.password = password;
-        this.rol = rol;
+        this.role = role;
     }
 
-    public String getUser() {
-        return user;
+    public int getCodUser() {
+        return codUser;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setCodUser(int codUser) {
+        this.codUser = codUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -34,19 +42,12 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getRol() {
-        return rol;
+    public RoleDto getRole() {
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setRole(RoleDto role) {
+        this.role = role;
     }
 }
+

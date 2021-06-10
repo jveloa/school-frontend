@@ -50,11 +50,11 @@
                     </f:facet>
 
 
-                    <p:column headerText="Usuario" sortBy="#{user.user}" filterBy="#{user.user}">
-                        <h:outputText value="#{user.user}"/>
+                    <p:column headerText="Usuario" sortBy="#{user.username}" filterBy="#{user.username}">
+                        <h:outputText value="#{user.username}"/>
                     </p:column>
-                    <p:column headerText="Rol" sortBy="#{user.rol}">
-                        <h:outputText value="#{user.rol}"/>
+                    <p:column headerText="Rol" sortBy="#{user.role.nameRole}">
+                        <h:outputText value="#{user.role.nameRole}"/>
                     </p:column>
 
                     <p:column exportable="false">
