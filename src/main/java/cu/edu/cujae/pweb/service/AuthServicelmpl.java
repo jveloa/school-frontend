@@ -19,7 +19,7 @@ public class  AuthServicelmpl implements AuthService {
         UserAuthenticatedDto authenticatedDto = null;
         try {
             ApiRestMapper<UserAuthenticatedDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.POST("/api/v1/auth/login", new LoginRequestDto(username, password), String.class).getBody();
+            String response = (String)restService.POST("/api/v1/auth/login/", new LoginRequestDto(username, password), String.class).getBody();
             authenticatedDto = apiRestMapper.mapOne(response, UserAuthenticatedDto.class);
         } catch (Exception e) {
             authenticatedDto = null;

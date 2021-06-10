@@ -26,7 +26,7 @@ public class UserServiceImp implements UserService  {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/users", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String)restService.GET("/api/v1/users/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             userList = apiRestMapper.mapList(response, UserDto.class);
         } catch (IOException e) {
             e.printStackTrace();

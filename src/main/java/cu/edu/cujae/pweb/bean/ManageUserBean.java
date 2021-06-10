@@ -26,12 +26,6 @@ public class ManageUserBean {
 
     }
 
-   /* @PostConstruct
-    public void init() {
-        users = users == null ? usersService.getUsers() : users;
-
-    }*/
-
     public void openNew() {
         this.selectedUser = new UserDto();
      }
@@ -49,7 +43,7 @@ public class ManageUserBean {
     }
 
     public List<UserDto> getUsers() {
-        return users;
+        return usersService.getUsers();
     }
 
     public void setUsers(List<UserDto> users) {

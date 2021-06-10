@@ -14,8 +14,8 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Usuario</p:outputLabel>
                             <p:inputText id="username" required="true"
-                                         disabled="#{not empty manageUserBean.selectedUser.id}"
-                                         value="#{manageUserBean.selectedUser.user}"/>
+                                         disabled="#{empty manageUserBean.selectedUser.codUser}"
+                                         value="#{manageUserBean.selectedUser.username}"/>
                             <p:message for="@previous"></p:message>
                         </div>
 
@@ -25,16 +25,16 @@
                                                label="Seleccione"
                                                style="min-width: 15rem"
                                                panelStyle="width: 30rem"
-                                               value="#{manageUserBean.selectedUser.rol}">
-                                <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
-                                <f:selectItem itemLabel="Usuario" itemValue="Usuario"/>
+                                               value="#{manageUserBean.selectedUser.role.nameRole}">
+                                <f:selectItem itemLabel="Administrador" itemValue="administrador"/>
+                                <f:selectItem itemLabel="Usuario" itemValue="usuario"/>
                             </p:selectOneButton>
                         </div>
 
                         <div class="p-field">
-                            <p:outputLabel  for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                            <p:outputLabel  for="@next" rendered="#{empty manageUserBean.selectedUser.codUser}">Contraseña</p:outputLabel>
                             <p:password id="password1" required="true" match="password2"
-                                        rendered="#{empty manageUserBean.selectedUser.id}"
+                                        rendered="#{empty manageUserBean.selectedUser.codUser}"
                                         value="#{ manageUserBean.selectedUser.password}"
                                         >
                             </p:password>
@@ -42,13 +42,13 @@
                         </div>
                         
                         <div class="p-field" >
-                            <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                            <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.codUser}">Repetir contraseña</p:outputLabel>
                             <p:password id="password2" required="true"
-                                        rendered="#{empty manageUserBean.selectedUser.id}"
+                                        rendered="#{empty manageUserBean.selectedUser.codUser}"
                                         value="#{manageUserBean.selectedUser.password}"
                                         >
                             </p:password>
-                            <p:message for="@previous"  rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                            <p:message for="@previous"  rendered="#{empty manageUserBean.selectedUser.codUser}"></p:message>
                         </div>
                     
                     </h:panelGroup>
