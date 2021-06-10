@@ -29,7 +29,7 @@ public class EstudiantesServicelmpl implements EstudiantesService{
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/students", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String)restService.GET("/api/v1/students/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             estudiantes =  apiRestMapper.mapList(response, StudentDto.class);
         } catch (IOException e) {
             e.printStackTrace();
