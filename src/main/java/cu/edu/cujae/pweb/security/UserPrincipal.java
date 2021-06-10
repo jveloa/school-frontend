@@ -22,10 +22,11 @@ public class UserPrincipal implements UserDetails {
     private String token;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(int codUser, String username, String password, boolean active, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(int codUser, String username, String password, String token, boolean active, Collection<? extends GrantedAuthority> authorities) {
         this.codUser = codUser;
         this.username = username;
         this.password = password;
+        this.token=token;
         this.active = active;
         this.authorities = authorities;
     }
@@ -44,6 +45,7 @@ public class UserPrincipal implements UserDetails {
                 user.getCodUser(),
                 user.getUsername(),
                 user.getPassword(),
+                user.getToken(),
                 true,
                 authorities
         );
