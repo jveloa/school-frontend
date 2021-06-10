@@ -46,24 +46,24 @@
                     </f:facet>
 
 
-                    <p:column headerText="Nombre y Apelidos" sortBy="#{estudiantes.nombre}"
-                              filterBy="#{estudiantes.nombre}">
-                        <h:outputText value="#{estudiantes.nombre}"/>
+                    <p:column headerText="CI" sortBy="#{estudiantes.codStudent}"
+                              filterBy="#{estudiantes.codStudent}">
+                        <h:outputText value="#{estudiantes.codStudent}"/>
                     </p:column>
-                    <p:column headerText="Ci" sortBy="#{estudiantes.id}"
-                              filterBy="#{estudiantes.id}">
-                        <h:outputText value="#{estudiantes.id}"/>
+                    <p:column headerText="Nombre" sortBy="#{estudiantes.name}"
+                              filterBy="#{estudiantes.name}">
+                        <h:outputText value="#{estudiantes.name}"/>
                     </p:column>
-                    <p:column headerText="Grupo" sortBy="#{estudiantes.grupo}">
-                        <h:outputText value="#{estudiantes.grupo}"/>
+                    <p:column headerText="Apellidos" sortBy="#{estudiantes.lastName}">
+                        <h:outputText value="#{estudiantes.lastName}"/>
                     </p:column>
-                    <p:column headerText="Sexo" sortBy="#{estudiantes.sexo}"
-                              filterBy="#{estudiantes.sexo}">
-                        <h:outputText value="#{estudiantes.sexo}"/>
+                    <p:column headerText="Sexo" sortBy="#{estudiantes.gender.gender}"
+                              filterBy="#{estudiantes.gender.gender}">
+                        <h:outputText value="#{estudiantes.gender.gender}"/>
                     </p:column>
-                    <p:column headerText="Municipio" sortBy="#{estudiantes.municipio}"
-                              filterBy="#{estudiantes.municipio}">
-                        <h:outputText value="#{estudiantes.municipio}"/>
+                    <p:column headerText="Municipio" sortBy="#{estudiantes.municipality.municipality}"
+                              filterBy="#{estudiantes.municipality.municipality}">
+                        <h:outputText value="#{estudiantes.municipality.municipality}"/>
                     </p:column>
 
                     <p:column exportable="false">

@@ -9,7 +9,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
-import cu.edu.cujae.pweb.dto.EstudiantesDto;
+
+import cu.edu.cujae.pweb.dto.StudentDto;
 import cu.edu.cujae.pweb.service.EstudiantesService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ import cu.edu.cujae.pweb.utils.JsfUtils;
 @ManagedBean
 @ViewScoped
 public class ManageEstudiantesBean {
-    private EstudiantesDto estudiantesDto;
-    private EstudiantesDto selectedEstudiantes;
-    private List<EstudiantesDto> estudiantes;
+    private StudentDto estudiantesDto;
+    private StudentDto selectedEstudiantes;
+    private List<StudentDto> estudiantes;
 
 
     @Autowired
@@ -39,12 +40,12 @@ public class ManageEstudiantesBean {
 
    /* @PostConstruct
     public void init() {
-        estudiantes = estudiantes == null ? estudiantesService.getEstudiantes(): estudiantes;
+        estudiantes = estudiantesService.getEstudiantes();
 
     }*/
 
     public void openNew() {
-        this.selectedEstudiantes = new EstudiantesDto();
+        this.selectedEstudiantes = new StudentDto();
 
     }
 
@@ -61,27 +62,28 @@ public class ManageEstudiantesBean {
 
     }
 
-    public EstudiantesDto getEstudiantesDto() {
+    public StudentDto getEstudiantesDto() {
         return estudiantesDto;
     }
 
-    public void setEstudiantesDto(EstudiantesDto estudiantesDto) {
+    public void setEstudiantesDto(StudentDto estudiantesDto) {
         this.estudiantesDto = estudiantesDto;
     }
 
-    public EstudiantesDto getSelectedEstudiantes() {
+    public StudentDto getSelectedEstudiantes() {
         return selectedEstudiantes;
     }
 
-    public void setSelectedEstudiantes(EstudiantesDto selectedEstudiantes) {
+    public void setSelectedEstudiantes(StudentDto selectedEstudiantes) {
         this.selectedEstudiantes = selectedEstudiantes;
     }
 
-    public List<EstudiantesDto> getEstudiantes() {
+    public List<StudentDto> getEstudiantes() {
+        estudiantes= estudiantesService.getEstudiantes();
         return estudiantes;
     }
 
-    public void setEstudiantes(List<EstudiantesDto> estudiantes) {
+    public void setEstudiantes(List<StudentDto> estudiantes) {
         this.estudiantes = estudiantes;
     }
 
