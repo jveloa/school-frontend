@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+ <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -15,18 +15,18 @@
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Nueva Asignatura" icon="pi pi-plus"
-                                         oncomplete="PF('manageSignatureDialog').show()"
-                                         update=":form:manage-signatures-content"
-                                         actionListener="#{manageSignatureBean.openNew}"
+                                         oncomplete="PF('managesubjectDialog').show()"
+                                         update=":form:manage-subjects-content"
+                                         actionListener="#{manageSubjectBean.openNew}"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
-                            <p:resetInput target=":form:manage-signatures-content"/>
+                            <p:resetInput target=":form:manage-subjects-content"/>
                         </p:commandButton>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
                         
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-signatures"
+                            <p:dataExporter type="pdf" target="dt-subjects"
                                             fileName="Asignaturas"/>
                         </p:commandButton>
                     </p:toolbarGroup>
@@ -34,10 +34,10 @@
                 </p:toolbar>
                 
                 
-                <p:dataTable id="dt-signatures" var="signatureDto"
-                             widgetVar="dtSignatures" value="#{manageSignatureBean.signatures}"
+                <p:dataTable id="dt-subjects" var="subjectDto"
+                             widgetVar="dtsubjects" value="#{manageSubjectBean.subjects}"
                              reflow="true"
-                             rowKey="#{signatureDto.id}" paginator="true" rows="10"
+                             rowKey="#{subjectDto.codSubject}" paginator="true" rows="10"
                              rowSelectMode="add" paginatorPosition="bottom">
                     
                     <f:facet name="header">
@@ -45,7 +45,7 @@
                             <span style="font-weight: bold">Asignaturas</span> <span
                             class="filter-container ui-input-icon-left"> <i
                             class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                   onkeyup="PF('dtSignatures').filter()"
+                                                                   onkeyup="PF('dtsubjects').filter()"
                                                                    placeholder="Buscar"/>
 							</span>
                         
@@ -53,39 +53,39 @@
                     </f:facet>
                     
                     
-                    <p:column headerText="id" sortBy="#{signatureDto.id}"
+                    <p:column headerText="id" sortBy="#{subjectDto.codSubject}"
                               exportable="false">
-                        <h:outputText value="#{signatureDto.id}"/>
+                        <h:outputText value="#{subjectDto.codSubject}"/>
                     </p:column>
                     
-                    <p:column headerText="Nombre" sortBy="#{signatureDto.name}">
-                        <h:outputText value="#{signatureDto.name}"/>
+                    <p:column headerText="Nombre" sortBy="#{subjectDto.nameSubject}">
+                        <h:outputText value="#{subjectDto.nameSubject}"/>
                     </p:column>
-                    <p:column headerText="Horas" sortBy="#{signatureDto.hours}">
-                        <h:outputText value="#{signatureDto.hours}"/>
+                    <p:column headerText="Horas" sortBy="#{subjectDto.hours}">
+                        <h:outputText value="#{subjectDto.hours}"/>
                     </p:column>
-                    <p:column headerText="Año" sortBy="#{signatureDto.year}">
-                        <h:outputText value="#{signatureDto.year}"/>
+                    <p:column headerText="Año" sortBy="#{subjectDto.year}">
+                        <h:outputText value="#{subjectDto.year}"/>
                     </p:column>
-                    <p:column headerText="Curso" sortBy="#{signatureDto.curse}">
-                        <h:outputText value="#{signatureDto.curse}"/>
+                    <p:column headerText="Curso" sortBy="#{subjectDto.curse}">
+                        <h:outputText value="#{subjectDto.curse}"/>
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil"
-                                         action="#{manageSignaturesBean.openForEdit}"
-                                         update=":form:manage-signatures-content"
-                                         oncomplete="PF('manageSignatureDialog').show()"
+                                         action="#{managesubjectBean.openForEdit}"
+                                         update=":form:manage-subjects-content"
+                                         oncomplete="PF('managesubjectDialog').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
                                          process="@this">
-                            <f:setPropertyActionListener value="#{signatureDto}"
-                                                         target="#{manageSignatureBean.selectedsignature}"/>
-                            <p:resetInput target=":form:manage-signatures-content"/>
+                            <f:setPropertyActionListener value="#{subjectDto}"
+                                                         target="#{manageSubjectBean.selectedsubject}"/>
+                            <p:resetInput target=":form:manage-subjects-content"/>
                         </p:commandButton>
                         <p:commandButton class="ui-button-warning rounded-button"
                                          icon="pi pi-trash" process="@this"
-                                         action="#{manageSignatureBean.deleteSignature}">
-                            <f:setPropertyActionListener value="#{signatureDto}"
-                                                         target="#{manageSignatureBean.selectedsignature}"/>
+                                         action="#{manageSubjectBean.deletesubject}">
+                            <f:setPropertyActionListener value="#{subjectDto}"
+                                                         target="#{manageSubjectBean.selectedsubject}"/>
                             <p:confirm header="Confirmar"
                                        message="Está seguro de eliminar la asignatura?"
                                        icon="pi pi-exclamation-triangle"/>
@@ -93,7 +93,7 @@
                     </p:column>
                 
                 </p:dataTable>
-                <ui:include src="signature-form.xhtml"></ui:include>
+                <ui:include src="subject-form.xhtml"></ui:include>
                 <p:confirmDialog global="true" showEffect="fade" width="300">
                     <p:commandButton value="Si" type="button"
                                      styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
