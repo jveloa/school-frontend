@@ -1,14 +1,12 @@
 package cu.edu.cujae.pweb.bean;
 
-import cu.edu.cujae.pweb.dto.NotaDto;
-import cu.edu.cujae.pweb.service.NotaService;
+import cu.edu.cujae.pweb.dto.EvaluationDto;
+import cu.edu.cujae.pweb.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,17 +14,16 @@ import java.util.List;
 @ViewScoped
 public class ManageNotaBean {
 
-    private NotaDto notaDto;
-    private NotaDto selectedNota;
-    private List<NotaDto> notas;
-    private List<List<String>> notasPrueba;
+    private EvaluationDto notaDto;
+    private EvaluationDto selectedNota;
+    private List<EvaluationDto> notas;
     private List<String> notasValores;
 
     public ManageNotaBean(){
     }
 
     @Autowired
-    private NotaService notaService;
+    private EvaluationService evaluationService;
 
     /*@PostConstruct
     public void init() {
@@ -41,7 +38,7 @@ public class ManageNotaBean {
     }*/
 
     public void openNew() {
-        this.selectedNota = new NotaDto();
+        this.selectedNota = new EvaluationDto();
     }
 
     public void openForEdit() {
@@ -75,11 +72,11 @@ public class ManageNotaBean {
 */
     }
 
-    public NotaDto getNotaDto() {
+    public EvaluationDto getNotaDto() {
         return notaDto;
     }
 
-    public void setNotaDto(NotaDto notaDto) {
+    public void setNotaDto(EvaluationDto notaDto) {
         this.notaDto = notaDto;
     }
 
@@ -91,37 +88,29 @@ public class ManageNotaBean {
         this.notasValores = notasValores;
     }
 
-    public NotaDto getSelectedNota() {
+    public EvaluationDto getSelectedNota() {
         return selectedNota;
     }
 
-    public void setSelectedNota(NotaDto selectedNota) {
+    public void setSelectedNota(EvaluationDto selectedNota) {
         this.selectedNota = selectedNota;
     }
 
 
-    public List<NotaDto> getNotas() {
-        return notas;
+    public List<EvaluationDto> getNotas() {
+        return evaluationService.getNotas();
     }
 
-    public void setNotas(List<NotaDto> notas) {
+    public void setNotas(List<EvaluationDto> notas) {
         this.notas = notas;
     }
 
-    public List<List<String>> getNotasPrueba() {
-        return notasPrueba;
+    public EvaluationService getNotaService() {
+        return evaluationService;
     }
 
-    public void setNotasPrueba(List<List<String>> notasPrueba) {
-        this.notasPrueba = notasPrueba;
-    }
-
-    public NotaService getNotaService() {
-        return notaService;
-    }
-
-    public void setNotaService(NotaService notaService) {
-        this.notaService = notaService;
+    public void setNotaService(EvaluationService notaService) {
+        this.evaluationService = notaService;
     }
 
 }
