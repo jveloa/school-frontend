@@ -27,7 +27,7 @@ public class SubjectServiceImpl implements SubjectService {
 		try {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<SubjectDto> apiRestMapper = new ApiRestMapper<>();
-			String response = (String)restService.GET("/api/v1/subjects", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+			String response = (String)restService.GET("/api/v1/subjects/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
 			subjectList = apiRestMapper.mapList(response, SubjectDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();

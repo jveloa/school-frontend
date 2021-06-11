@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Asignaturas
+        Lista de asignaturas
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
@@ -15,7 +15,7 @@
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Nueva Asignatura" icon="pi pi-plus"
-                                         oncomplete="PF('managesubjectDialog').show()"
+                                         oncomplete="PF('manageSubjectDialog').show()"
                                          update=":form:manage-subjects-content"
                                          actionListener="#{manageSubjectBean.openNew}"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
@@ -35,7 +35,7 @@
                 
                 
                 <p:dataTable id="dt-subjects" var="subjectDto"
-                             widgetVar="dtsubjects" value="#{manageSubjectBean.subjects}"
+                             widgetVar="dtSubjects" value="#{manageSubjectBean.subjects}"
                              reflow="true"
                              rowKey="#{subjectDto.codSubject}" paginator="true" rows="10"
                              rowSelectMode="add" paginatorPosition="bottom">
@@ -45,7 +45,7 @@
                             <span style="font-weight: bold">Asignaturas</span> <span
                             class="filter-container ui-input-icon-left"> <i
                             class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                   onkeyup="PF('dtsubjects').filter()"
+                                                                   onkeyup="PF('dtSubjects').filter()"
                                                                    placeholder="Buscar"/>
 							</span>
                         
@@ -53,22 +53,22 @@
                     </f:facet>
                     
                     
-                    <p:column headerText="id" sortBy="#{subjectDto.codSubject}"
+                    <p:column headerText="id" sortBy="#{subjectDto.codSubject}" filterBy="#{subjectDto.codSubject}"
                               exportable="false">
                         <h:outputText value="#{subjectDto.codSubject}"/>
                     </p:column>
                     
-                    <p:column headerText="Nombre" sortBy="#{subjectDto.nameSubject}">
+                    <p:column headerText="Nombre" sortBy="#{subjectDto.nameSubject}" filterBy="#{subjectDto.nameSubject}">
                         <h:outputText value="#{subjectDto.nameSubject}"/>
                     </p:column>
-                    <p:column headerText="Horas" sortBy="#{subjectDto.hours}">
+                    <p:column headerText="Horas" sortBy="#{subjectDto.hours}" filterBy="#{subjectDto.hours}">
                         <h:outputText value="#{subjectDto.hours}"/>
                     </p:column>
-                    <p:column headerText="Año" sortBy="#{subjectDto.year}">
-                        <h:outputText value="#{subjectDto.year}"/>
+                    <p:column headerText="Año" sortBy="#{subjectDto.year.yearNumber}" filterBy="#{subjectDto.year.yearNumber}">
+                        <h:outputText value="#{subjectDto.year.yearNumber}"/>
                     </p:column>
-                    <p:column headerText="Curso" sortBy="#{subjectDto.curse}">
-                        <h:outputText value="#{subjectDto.curse}"/>
+                    <p:column headerText="Curso" sortBy="#{subjectDto.year.course.course}" filterBy="#{subjectDto.year.course.course}">
+                        <h:outputText value="#{subjectDto.year.course.course}"/>
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil"

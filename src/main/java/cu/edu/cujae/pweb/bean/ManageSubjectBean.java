@@ -5,6 +5,7 @@ import cu.edu.cujae.pweb.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import java.util.List;
@@ -14,52 +15,53 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class ManageSubjectBean {
-    private List<SubjectDto> Subjects;
-    private SubjectDto selectedSubject;
-    private SubjectDto SubjectDto;
+    private List<SubjectDto> subjects;
+    private SubjectDto selectedsubject;
+    private SubjectDto subjectDto;
 
     @Autowired
     private SubjectService subjectService;
 
     public ManageSubjectBean() {
     }
-
-   /* @PostConstruct
+    /*
+    @PostConstruct
     public void init() {
-        Subjects = Subjects == null ? SubjectService.getSubjects() : Subjects;
+        subjects = subjects == null ? subjectService.getSubjects() : subjects;
     }*/
 
     public List<SubjectDto> getSubjects() {
-        return Subjects;
+        subjects = subjectService.getSubjects();
+        return subjects;
     }
 
-    public void setSubjects(List<SubjectDto> Subjects) {
-        this.Subjects = Subjects;
+    public void setSubjects(List<SubjectDto> subjects) {
+        this.subjects = subjects;
     }
 
     public void openNew() {
-        selectedSubject = new SubjectDto();
+        selectedsubject = new SubjectDto();
     }
 
     public void openForEdit() {
 
     }
 
-    public SubjectDto getSelectedSubject() {
-        return selectedSubject;
+    public SubjectDto getSelectedsubject() {
+        return selectedsubject;
     }
 
 
-    public void setSelectedSubject(SubjectDto selectedSubject) {
-        this.selectedSubject = selectedSubject;
+    public void setSelectedsubject(SubjectDto selectedsubject) {
+        this.selectedsubject = selectedsubject;
     }
 
     public SubjectDto getSubjectDto() {
-        return SubjectDto;
+        return subjectDto;
     }
 
     public void setSubjectDto(SubjectDto SubjectDto) {
-        this.SubjectDto = SubjectDto;
+        this.subjectDto = SubjectDto;
     }
 
     public SubjectService getSubjectService() {
