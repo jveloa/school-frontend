@@ -62,11 +62,13 @@ public class RestService {
 
     public ResponseEntity PUT(String endpoint, MultiValueMap<String, String> queryParams, Object body, Class clss, String jwt) {
         try {
-            return buildRestTemplate().exchange(
+            return buildRestTemplate()
+                .exchange(
                     getUri(getUrlBackend() + endpoint, queryParams),
                     HttpMethod.PUT,
                     new HttpEntity(body, HttpHeadersForm(jwt)),
-                    clss);
+                    clss
+                );
         } catch (HttpServerErrorException e) {
             return handleRequestException(e);
         }

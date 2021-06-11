@@ -32,9 +32,9 @@
                         </div>
 
                         <div class="p-field">
-                            <p:outputLabel  for="@next" rendered="#{empty manageUserBean.selectedUser.codUser}">Contraseña</p:outputLabel>
+                            <p:outputLabel  for="@next" rendered="#{manageUserBean.selectedUser.codUser == 0}">Contraseña</p:outputLabel>
                             <p:password id="password1" required="true" match="password2"
-                                        rendered="#{empty manageUserBean.selectedUser.codUser}"
+                                        rendered="#{manageUserBean.selectedUser.codUser == 0}"
                                         value="#{ manageUserBean.selectedUser.password}"
                                         >
                             </p:password>
@@ -42,9 +42,9 @@
                         </div>
                         
                         <div class="p-field" >
-                            <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.codUser}">Repetir contraseña</p:outputLabel>
+                            <p:outputLabel for="@next" rendered="#{manageUserBean.selectedUser.codUser == 0}">Repetir contraseña</p:outputLabel>
                             <p:password id="password2" required="true"
-                                        rendered="#{empty manageUserBean.selectedUser.codUser}"
+                                        rendered="#{manageUserBean.selectedUser.codUser == 0}"
                                         value="#{manageUserBean.selectedUser.password}"
                                         >
                             </p:password>

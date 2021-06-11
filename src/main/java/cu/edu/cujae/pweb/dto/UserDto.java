@@ -8,6 +8,7 @@ public class UserDto {
     private RoleDto role;
 
     public UserDto() {
+        role = new RoleDto();
     }
 
 

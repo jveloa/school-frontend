@@ -8,4 +8,8 @@ public interface UserService {
 
 
     List<UserDto> getUsers();
+    void createUser(UserDto user);
+    void updateUser(UserDto user);
+    void deleteUser(int codUser);
+
 }

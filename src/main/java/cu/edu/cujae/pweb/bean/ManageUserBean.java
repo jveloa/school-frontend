@@ -2,10 +2,12 @@ package cu.edu.cujae.pweb.bean;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.service.UserService;
+import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,10 +37,32 @@ public class ManageUserBean {
     }
 
     public void saveUser() {
+        if (this.selectedUser.getCodUser() == 0) {
+            usersService.createUser(this.selectedUser);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added");
+        } else {
+            usersService.updateUser(this.selectedUser);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
+        }
+
+        users = usersService.getUsers();
         PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+        PrimeFaces.current().ajax().update("form:dt-users");
     }
 
     public void deleteUser() {
+        try{
+            usersService.deleteUser(this.selectedUser.getCodUser());
+            this.selectedUser = null;
+
+            users = usersService.getUsers();
+
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_deleted");
+            PrimeFaces.current().ajax().update("form:dt-users");
+        }catch (Exception e){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            e.printStackTrace();
+        }
 
     }
 
