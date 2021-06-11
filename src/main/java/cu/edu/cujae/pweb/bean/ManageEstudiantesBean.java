@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
 
+import cu.edu.cujae.pweb.dto.GenderDto;
+import cu.edu.cujae.pweb.dto.MunicipalityDto;
 import cu.edu.cujae.pweb.dto.StudentDto;
 import cu.edu.cujae.pweb.service.EstudiantesService;
 import org.primefaces.PrimeFaces;
@@ -28,6 +30,8 @@ public class ManageEstudiantesBean {
     private List<StudentDto> estudiantes;
 
 
+
+
     @Autowired
     private EstudiantesService estudiantesService;
 
@@ -38,15 +42,12 @@ public class ManageEstudiantesBean {
     }
 
 
-   /* @PostConstruct
-    public void init() {
-        estudiantes = estudiantesService.getEstudiantes();
 
-    }*/
 
     public void openNew() {
         this.selectedEstudiantes = new StudentDto();
-
+        this.selectedEstudiantes.setGender(new GenderDto());
+        this.selectedEstudiantes.setMunicipality(new MunicipalityDto());
     }
 
 
@@ -55,11 +56,39 @@ public class ManageEstudiantesBean {
     }
 
     public void saveEstudiantes() {
+        if (this.selectedEstudiantes.getCodStudent() == 0) {
+            this.selectedEstudiantes.setCodStudent((int) (Math.random()*100)+1);
+            //register student
+            estudiantesService.createEstudiantes(this.selectedEstudiantes);
+
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_added");
+        } else {
+            //edit student
+
+            estudiantesService.updateEstudiantes(this.selectedEstudiantes);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_edited");
+        }
+
+        //load datatable again with new values
+        estudiantes = estudiantesService.getEstudiantes();
+         PrimeFaces.current().executeScript("PF('manageEstudiantesDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-estudiantes");
     }
 
     public void deleteEstudiantes() {
+        try {
+            //delete student
+            estudiantesService.deleteEstudiantes(this.selectedEstudiantes.getCodStudent());
+            this.selectedEstudiantes = null;
 
+            //load datatable again with new values
+            estudiantes = estudiantesService.getEstudiantes();
+
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_deleted");
+            PrimeFaces.current().ajax().update("form:dt-estudiantes");
+        } catch (Exception e) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+        }
     }
 
     public StudentDto getEstudiantesDto() {
