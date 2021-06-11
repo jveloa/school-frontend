@@ -33,7 +33,7 @@
 
 
                 <p:dataTable id="dt-notas" widgetVar="dtNotas" var="nota"
-                             value="#{manageNotaBean.notasPrueba}" reflow="true" paginator="true"
+                             value="#{manageNotaBean.notas}" reflow="true" paginator="true"
                              rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
@@ -47,17 +47,17 @@
                     </f:facet>
 
 
-                    <p:column headerText="Asignatura" sortBy="#{nota[0]}" filterBy="#{nota[0]}">
-                        <h:outputText value="#{nota[0]}" />
+                    <p:column headerText="Asignatura" sortBy="#{nota.subject.nameSubject}" filterBy="#{nota.subject.nameSubject}">
+                        <h:outputText value="#{nota.subject.nameSubject}" />
                     </p:column>
-                    <p:column headerText="Nota" sortBy="##{nota[1]}"
-                              filterBy="#{nota[1]}">
-                        <h:outputText value="#{nota[1]}" />
+                    <p:column headerText="Nota" sortBy="##{nota.rangeEvaluation.evaluation}"
+                              filterBy="#{nota.rangeEvaluation.evaluation}">
+                        <h:outputText value="#{nota.rangeEvaluation.evaluation}" />
                     </p:column>
 
-                    <p:column headerText="Año" sortBy="##{nota[2]}"
-                              filterBy="#{nota[2]}">
-                        <h:outputText value="#{nota[2]}" />
+                    <p:column headerText="Año" sortBy="##{nota.year.yearNumber}"
+                              filterBy="#{nota.year.yearNumber}">
+                        <h:outputText value="#{nota.year.yearNumber}" />
                     </p:column>
 
                     <p:column exportable="false">
