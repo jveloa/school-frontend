@@ -57,22 +57,22 @@ public class EstudiantesServicelmpl implements EstudiantesService{
 
     @Override
     public void createEstudiantes(StudentDto estudiante) {
-        restService.POST("/api/v1/students", estudiante, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+        restService.POST("/api/v1/students/", estudiante, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateEstudiantes(StudentDto estudiante)
     {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        restService.PUT("/api/v1/students", params, estudiante, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+        restService.PUT("/api/v1/students/", params, estudiante, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
-    public void deleteEstudiantes(String id) {
+    public void deleteEstudiantes(int codStudent) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/api/v1/students/{studentsId}");
-        String uri = template.expand(id).toString();
-        restService.DELETE(uri, params, String.class, null).getBody();
+        UriTemplate template = new UriTemplate("/api/v1/students/{codStudent}");
+        String uri = template.expand(codStudent).toString();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
 

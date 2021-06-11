@@ -11,6 +11,6 @@ public interface EstudiantesService {
         StudentDto getEstudiantesById(String estudianteId);
         void createEstudiantes(StudentDto estudiante);
         void updateEstudiantes(StudentDto estudiante);
-        void deleteEstudiantes(String id);
+        void deleteEstudiantes(int id);
 
 }
