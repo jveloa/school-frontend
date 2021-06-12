@@ -15,9 +15,9 @@
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Nueva Asignatura" icon="pi pi-plus"
-                                         oncomplete="PF('manageSubjectDialog').show()"
-                                         update=":form:manage-subjects-content"
                                          actionListener="#{manageSubjectBean.openNew}"
+                                         update=":form:manage-subjects-content"
+                                         oncomplete="PF('manageSubjectDialog').show()"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
                             <p:resetInput target=":form:manage-subjects-content"/>
                         </p:commandButton>
@@ -51,13 +51,6 @@
                         
                         </div>
                     </f:facet>
-                    
-                    
-                    <p:column headerText="id" sortBy="#{subjectDto.codSubject}" filterBy="#{subjectDto.codSubject}"
-                              exportable="false">
-                        <h:outputText value="#{subjectDto.codSubject}"/>
-                    </p:column>
-                    
                     <p:column headerText="Nombre" sortBy="#{subjectDto.nameSubject}" filterBy="#{subjectDto.nameSubject}">
                         <h:outputText value="#{subjectDto.nameSubject}"/>
                     </p:column>
@@ -72,20 +65,20 @@
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil"
-                                         action="#{managesubjectBean.openForEdit}"
+                                         action="#{manageSubjectBean.openForEdit}"
                                          update=":form:manage-subjects-content"
-                                         oncomplete="PF('managesubjectDialog').show()"
+                                         oncomplete="PF('manageSubjectDialog').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
                                          process="@this">
                             <f:setPropertyActionListener value="#{subjectDto}"
-                                                         target="#{manageSubjectBean.selectedsubject}"/>
+                                                         target="#{manageSubjectBean.selectedSubject}"/>
                             <p:resetInput target=":form:manage-subjects-content"/>
                         </p:commandButton>
                         <p:commandButton class="ui-button-warning rounded-button"
                                          icon="pi pi-trash" process="@this"
-                                         action="#{manageSubjectBean.deletesubject}">
+                                         action="#{manageSubjectBean.deleteSubject}">
                             <f:setPropertyActionListener value="#{subjectDto}"
-                                                         target="#{manageSubjectBean.selectedsubject}"/>
+                                                         target="#{manageSubjectBean.selectedSubject}"/>
                             <p:confirm header="Confirmar"
                                        message="Está seguro de eliminar la asignatura?"
                                        icon="pi pi-exclamation-triangle"/>

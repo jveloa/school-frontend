@@ -6,5 +6,5 @@ public interface SubjectService {
 	List<SubjectDto> getSubjects();
     void createSubject(SubjectDto subject);
     void updateSubject(SubjectDto subject);
-    void deleteSubject(String id);
+    void deleteSubject(int id);
 }

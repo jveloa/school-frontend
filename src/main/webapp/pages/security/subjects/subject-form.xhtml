@@ -7,28 +7,25 @@
     <p:dialog header="Asignatura" showEffect="fade" modal="true"
               widgetVar="manageSubjectDialog" responsive="true">
         <p:outputPanel id="manage-subjects-content" class="ui-fluid">
-            <p:outputPanel
-                rendered="#{not empty manageSubjectBean.selectedsubject}">
+            <p:outputPanel rendered="#{not empty manageSubjectBean.selectedSubject}">
                 <p:panelGrid layout="grid" columns="1">
                     <h:panelGroup>
                         <div class="p-field">
                             <p:outputLabel for="@next">Nombre de la Asignatura</p:outputLabel>
                             <p:inputText id="name" required="true"
-                                         value="#{manageSubjectBean.selectedsubject.nameSubject}"/>
+                                         value="#{manageSubjectBean.selectedSubject.nameSubject}"/>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Horas</p:outputLabel>
                             <p:inputNumber id="hours" required="true"
-                                           value="#{manageSubjectBean.selectedsubject.hours}"/>
+                                           value="#{manageSubjectBean.selectedSubject.hours}"/>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Año</p:outputLabel>
                             <p:selectOneMenu id="year" required="true"
-                                             value="#{manageSubjectBean.selectedsubject.year.yearNumber}">
-                                <p:keyFilter mask="num"/>
-                                <f:selectItem itemLabel="" itemValue=""/>
+                                             value="#{manageSubjectBean.selectedSubject.year.yearNumber}">
                                 <f:selectItem itemLabel="1ro" itemValue="1"/>
                                 <f:selectItem itemLabel="2do" itemValue="2"/>
                                 <f:selectItem itemLabel="3ro" itemValue="3"/>
@@ -40,7 +37,7 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Curso</p:outputLabel>
                             <p:inputText id="curse" required="true"
-                                         value="#{manageSubjectBean.selectedsubject.year.course.course}">
+                                         value="#{manageSubjectBean.selectedSubject.year.course.course}">
                             </p:inputText>
                             <p:message for="@previous"></p:message>
                         </div>
@@ -51,10 +48,10 @@
         
         <f:facet name="footer">
             <p:commandButton value="Salvar" icon="pi pi-check"
-                             actionListener="#{manageSubjectBean.savesubject}"
+                             actionListener="#{manageSubjectBean.saveSubject}"
                              update="manage-subjects-content" process="manage-subjects-content @this"/>
             <p:commandButton value="Cancelar" icon="pi pi-times"
-                             onclick="PF('managesubjectDialog').hide()" class="ui-button-secondary"/>
+                             onclick="PF('manageSubjectDialog').hide()" class="ui-button-secondary"/>
         </f:facet>
     </p:dialog>
 </ui:composition>
