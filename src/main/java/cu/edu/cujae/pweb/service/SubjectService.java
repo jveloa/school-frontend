@@ -6,8 +6,8 @@ public interface SubjectService {
 	List<SubjectDto> getSubjects();
     void createSubject(SubjectDto subject);
     void updateSubject(SubjectDto subject);
-    void deleteSubject(String id);
     List<SubjectDto> getSubjectsByStudent(int codStudent);
     List<SubjectDto> getSubjectsEvaluatedByStudent(int codStudent);
     SubjectDto getSubjectById(int codSubject);
+    void deleteSubject(int id);
 }

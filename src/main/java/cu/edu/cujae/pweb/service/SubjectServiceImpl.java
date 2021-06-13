@@ -39,16 +39,33 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-    public void createSubject(SubjectDto Subject) {
-    	
-    }
+    public void createSubject(SubjectDto subject) {
+		try {
+			restService.POST("/api/v1/subjects/", subject, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
-    public void updateSubject(SubjectDto Subject) {
-    	
-    }
+    public void updateSubject(SubjectDto subject) {
+		try{
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+			restService.PUT("api/v1/subjects/",params,subject,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
-    public void deleteSubject(String id) {
-    	
+    public void deleteSubject(int id) {
+		try {
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+			UriTemplate template = new UriTemplate("/api/v1/subjects/{id}");
+			String uri = template.expand(id).toString();
+			restService.DELETE(uri,params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
     }
 
 	@Override
