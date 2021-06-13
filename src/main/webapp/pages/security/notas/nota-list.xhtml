@@ -18,7 +18,9 @@
                                          actionListener="#{manageNotaBean.openNew}"
                                          update=":form:manage-nota-content"
                                          oncomplete="PF('manageNotaDialog').show()"
-                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                                         styleClass="ui-button-success" style="margin-right: .5rem"
+                                        disabled="#{empty manageNotaBean.subjectsNotEvaluatedByStudent}"
+                        >
                             <p:resetInput target=":form:manage-nota-content" />
                         </p:commandButton>
                     </p:toolbarGroup>
