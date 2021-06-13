@@ -38,8 +38,13 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
     public void createSubject(SubjectDto subject) {
-		restService.POST("/api/v1/subjects/", subject, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-    }
+		try {
+			restService.POST("/api/v1/subjects/", subject, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
     public void updateSubject(SubjectDto subject) {
 		try{
