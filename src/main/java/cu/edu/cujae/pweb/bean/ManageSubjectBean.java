@@ -29,11 +29,6 @@ public class ManageSubjectBean {
 
     public ManageSubjectBean() {
     }
-    /*
-    @PostConstruct
-    public void init() {
-        subjects = subjects == null ? subjectService.getSubjects() : subjects;
-    }*/
 
     public List<SubjectDto> getSubjects() {
         subjects = subjectService.getSubjects();
