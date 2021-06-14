@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,8 +57,14 @@ public class EvaluationServiceImpl implements EvaluationService {
 
 
     @Override
-    public void deleteNota(int  codigo_asignatura, int codigo_anno, int codigo_estudiante) {
-        // TODO Auto-generated method stub
-
+    public void deleteNota(int  codSubject, int codYear, int codStudent) {
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            UriTemplate template = new UriTemplate("/api/v1/evaluations//{codSubject}/{codStudent}/{codYear}");
+            String uri = template.expand(codSubject, codStudent, codYear).toString();
+            restService.DELETE(uri,params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

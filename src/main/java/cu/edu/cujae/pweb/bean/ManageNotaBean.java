@@ -80,20 +80,23 @@ public class ManageNotaBean {
 
             notas = evaluationService.getNotas(selectedStudent);
             PrimeFaces.current().executeScript("PF('manageNotaDialog').hide()");
-            PrimeFaces.current().ajax().update("form:dt-notas");
+            PrimeFaces.current().ajax().update("form");
 
     }
 
-    public void deleteUser() {
-        /*try {
-            this.notasPrueba.remove(this.selectedNotaPrueba);
-            this.selectedNotaPrueba = null;
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_removed");
-            PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-        } catch (Exception e) {
+    public void deleteNota() {
+        try{
+            evaluationService.deleteNota(selectedNota.getSubject().getCodSubject(), selectedNota.getYear().getCodYear(), selectedStudent.getCodStudent());
+            this.selectedNota = null;
+
+            this.notas = evaluationService.getNotas(selectedStudent);
+
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_nota_deleted");
+            PrimeFaces.current().ajax().update("form");
+        }catch (Exception e){
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            e.printStackTrace();
         }
-*/
     }
 
     public EvaluationDto getNotaDto() {
