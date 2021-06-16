@@ -12,22 +12,29 @@
                     <h:panelGroup>
                         <div class="p-field">
                             <p:outputLabel for="@next">Asignatura</p:outputLabel>
-                            <p:inputText id="name" required="true"
-                                         value="#{manageNotaBean.selectedNota.codigo_asignatura}" />
-                            <p:message for="@previous" ></p:message>
+                            <p:selectOneMenu id="subjects" required="true"
+                                             value="#{manageNotaBean.selectedNota.subject.codSubject}" label="Seleccione"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250"
+                            disabled="#{manageNotaBean.selectedNota.subject.codSubject!=0}"
+                            >
+                                <f:selectItems value="#{manageNotaBean.subjectsNotEvaluatedByStudent}" var="subjects" itemLabel="#{subjects.nameSubject}" itemValue="#{subjects.codSubject}"/>
+
+                            </p:selectOneMenu>
                         </div>
 
                     </h:panelGroup>
                     <h:panelGroup>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Roles</p:outputLabel>
+                            <p:outputLabel for="@next">Notas</p:outputLabel>
                             <p:selectOneMenu id="multiple" required="true"
-                                             value="#{manageNotaBean.notas}" label="Seleccione"
+                                             value="#{manageNotaBean.selectedNota.rangeEvaluation.codEvaluation}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
-                                <f:selectItems value="#{manageNotaBean.notasValores}" var="nota"
-                                               itemLabel="#{nota}" itemValue="#{nota}" />
+                                <f:selectItems value="#{manageRangeEvaluationBean.evaluations}" var="evaluation" itemLabel="#{evaluation.evaluation}" itemValue="#{evaluation.codEvaluation}"/>
+
                             </p:selectOneMenu>
                         </div>
 

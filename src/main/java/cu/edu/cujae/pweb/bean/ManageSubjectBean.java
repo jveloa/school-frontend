@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.el.MethodExpression;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
@@ -40,10 +41,10 @@ public class ManageSubjectBean {
     }
 
     public void openNew() {
-        selectedSubject = new SubjectDto();
-        selectedSubject.setCodSubject(0);
-        selectedSubject.setYear(new YearDto());
-        selectedSubject.getYear().setCourse(new CourseDto());
+        this.selectedSubject = new SubjectDto();
+        this.selectedSubject.setCodSubject(0);
+        this.selectedSubject.setYear(new YearDto());
+        this.selectedSubject.getYear().setCourse(new CourseDto());
     }
 
     public void saveSubject() {
@@ -93,5 +94,8 @@ public class ManageSubjectBean {
 
     public void setSubjectService(SubjectService subjectService) {
         this.subjectService = subjectService;
+    }
+
+    public void openForEdit() {
     }
 }

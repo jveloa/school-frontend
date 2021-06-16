@@ -85,10 +85,24 @@
                         </p:commandButton>
 
                         
-                            <h:link style="margin-right: .5rem; background: #2196F3;margin-top: .5rem; float: left;
-                         padding: 5px; color: white; border-radius: 5px;" outcome="/pages/security/notas/nota-list.xhtml" >
+                           <!-- <h:link   >
                                 Ver Notas
-                            </h:link>
+                                <f:setPropertyActionListener value="#{estudiantes}"
+                                                             target="#{manageEstudiantesBean.selectedEstudiantes}"/>
+                            </h:link>-->
+
+                        <p:commandButton style="margin-right: .5rem; background: #2196F3;margin-top: .5rem; float: left;
+                         color: white; border-radius: 5px;"
+                                         action="/pages/security/notas/nota-list.xhtml"
+                                         update=":form:manage-estudiantes-content"
+                                         oncomplete="PF('manageEstudiantesDialog').show()"
+                                         process="@this"
+
+                        value="Ver Notas">
+                            <f:setPropertyActionListener value="#{estudiantes}"
+                                                         target="#{manageNotaBean.selectedStudent}"/>
+
+                        </p:commandButton>
                        
 
                     </p:column>

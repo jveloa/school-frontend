@@ -14,11 +14,14 @@
                 <p:toolbar>
                     <p:toolbarGroup>
 
-                        <p:commandButton value="Insertar Nota" icon="pi pi-plus"
+                        <p:commandButton id="insert-btn" value="Insertar Nota" icon="pi pi-plus"
                                          actionListener="#{manageNotaBean.openNew}"
                                          update=":form:manage-nota-content"
                                          oncomplete="PF('manageNotaDialog').show()"
-                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                                         styleClass="ui-button-success" style="margin-right: .5rem"
+                                        disabled="#{empty manageNotaBean.subjectsNotEvaluatedByStudent}"
+                                         ajax="true"
+                        >
                             <p:resetInput target=":form:manage-nota-content" />
                         </p:commandButton>
                     </p:toolbarGroup>
@@ -72,7 +75,7 @@
                         </p:commandButton>
                         <p:commandButton class="ui-button-warning rounded-button"
                                          icon="pi pi-trash" process="@this"
-                                         action="#{manageNotaBean.deleteUser}" >
+                                         action="#{manageNotaBean.deleteNota}" >
                             <f:setPropertyActionListener value="#{nota}"
                                                          target="#{manageNotaBean.selectedNota}" />
                             <p:confirm header="Confirmar" message="Está seguro de eliminar esta nota?" icon="pi pi-exclamation-triangle"/>

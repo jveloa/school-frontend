@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.service;
 
 
 import cu.edu.cujae.pweb.dto.EvaluationDto;
+import cu.edu.cujae.pweb.dto.StudentDto;
 import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,13 +24,13 @@ public class EvaluationServiceImpl implements EvaluationService {
     private RestService restService;
 
     @Override
-    public List<EvaluationDto> getNotas() {
-
+    public List<EvaluationDto> getNotas(StudentDto student) {
+        int codStudent = student.getCodStudent();
         List<EvaluationDto> evaluationList = new ArrayList<EvaluationDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<EvaluationDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/evaluations/50", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String)restService.GET("/api/v1/evaluations/"+String.valueOf(codStudent), params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             evaluationList = apiRestMapper.mapList(response, EvaluationDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,18 +45,26 @@ public class EvaluationServiceImpl implements EvaluationService {
 
     @Override
     public void createNota(EvaluationDto nota) {
+        restService.POST("/api/v1/evaluations/", nota, String.class, CurrentUserUtils.getTokenBearer()).getBody();
 
     }
 
     @Override
     public void updateNota(EvaluationDto nota) {
-
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/evaluations/", params, nota, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
 
     @Override
-    public void deleteNota(int  codigo_asignatura, int codigo_anno, int codigo_estudiante) {
-        // TODO Auto-generated method stub
-
+    public void deleteNota(int  codSubject, int codYear, int codStudent) {
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            UriTemplate template = new UriTemplate("/api/v1/evaluations//{codSubject}/{codStudent}/{codYear}");
+            String uri = template.expand(codSubject, codStudent, codYear).toString();
+            restService.DELETE(uri,params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
