@@ -14,7 +14,7 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Usuario</p:outputLabel>
                             <p:inputText id="username" required="true"
-                                         disabled="#{empty manageUserBean.selectedUser.codUser}"
+                                         disabled="#{manageUserBean.selectedUser.codUser != 0 }"
                                          value="#{manageUserBean.selectedUser.username}"/>
                             <p:message for="@previous"></p:message>
                         </div>
