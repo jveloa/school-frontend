@@ -9,21 +9,19 @@
         <div class="layout-menu">
                 <div class="menu-category">Administración</div>
                 <div class="menu-items">
-                    <sec:authorize access="hasAnyAuthority('administrador')">
-                    <h:link outcome="/pages/security/users/user-list.xhtml">
-                        Usuarios
-                    </h:link>
-                    <h:link outcome="/pages/security/estudiantes/estudiantes-list.xhtml">
-                        Estudiantes
-                    </h:link>
-                    <h:link outcome="/pages/security/subjects/subject-list.xhtml">
-                        Asignaturas
-                    </h:link>
-                        <h:link outcome="/pages/security/group/group-list.xhtml">
-                            Grupos
+                    <sec:authorize access="hasAnyAuthority('administrador','usuario')">
+                        <sec:authorize access="hasAnyAuthority('administrador')">
+                            <h:link outcome="/pages/security/users/user-list.xhtml">
+                                Usuarios
+                            </h:link>
+                        </sec:authorize>
+                        <h:link outcome="/pages/security/estudiantes/estudiantes-list.xhtml">
+                            Estudiantes
+                        </h:link>
+                        <h:link outcome="/pages/security/subjects/subject-list.xhtml">
+                            Asignaturas
                         </h:link>
                     </sec:authorize>
-
                 </div>
 
         </div>
