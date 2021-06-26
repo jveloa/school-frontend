@@ -45,14 +45,6 @@ public class ManageNotaBean {
     public ManageNotaBean(){
     }
 
-    @PostConstruct
-    public void init() {
-       evaluations = rangeEvaluationService.getRangeEvaluation();
-    }
-
-
-
-
 
     public void openNew() {
         this.selectedNota = new EvaluationDto();

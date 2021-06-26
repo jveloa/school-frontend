@@ -2,7 +2,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags"
+>
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
@@ -13,25 +15,27 @@
             <div class="card crud-demo">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Nuevo Usuario" icon="pi pi-plus"
-                                         actionListener="#{manageUserBean.openNew}"
-                                         update=":form:manage-user-content"
-                                         oncomplete="PF('manageUserDialog').show()"
-                                         styleClass="ui-button-success"
-                                         style="margin-right: .5rem">
-                            <p:resetInput target=":form:manage-user-content"/>
-                        </p:commandButton>
+                        <sec:authorize access="hasAnyAuthority('administrador')">
+                            <p:commandButton value="Nuevo Usuario" icon="pi pi-plus"
+                                             actionListener="#{manageUserBean.openNew}"
+                                             update=":form:manage-user-content"
+                                             oncomplete="PF('manageUserDialog').show()"
+                                             styleClass="ui-button-success"
+                                             style="margin-right: .5rem">
+                                <p:resetInput target=":form:manage-user-content"/>
+                            </p:commandButton>
+                        </sec:authorize>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-
+                        
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
                             <p:dataExporter type="pdf" target="dt-users" fileName="users"/>
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
-
-
+                
+                
                 <p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
                              reflow="true" paginator="true"
                              value="#{manageUserBean.users}"
@@ -40,49 +44,53 @@
                         <div class="products-table-header">
                             <span style="font-weight: bold">Usuarios</span>
                             <span
-                                    class="filter-container ui-input-icon-left">
+                                class="filter-container ui-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('dtUsers').filter()" placeholder="Buscar"/>
 							</span>
-
+                        
                         </div>
                     </f:facet>
-
-
+                    
+                    
                     <p:column headerText="Usuario" sortBy="#{user.username}" filterBy="#{user.username}">
                         <h:outputText value="#{user.username}"/>
                     </p:column>
+                    
                     <p:column headerText="Rol" sortBy="#{user.role.nameRole}">
                         <h:outputText value="#{user.role.nameRole}"/>
                     </p:column>
-
-                    <p:column exportable="false">
-                        <p:commandButton icon="pi pi-pencil"
-                                         action="#{manageUserBean.openForEdit}"
-                                         update=":form:manage-user-content"
-                                         oncomplete="PF('manageUserDialog').show()"
-                                         styleClass="edit-button rounded-button ui-button-success"
-                                         process="@this">
-                            <f:setPropertyActionListener value="#{user}"
-                                                         target="#{manageUserBean.selectedUser}"/>
-                            <p:resetInput target=":form:manage-user-content"/>
-                        </p:commandButton>
-
-                        <p:commandButton class="ui-button-warning rounded-button"
-                                         icon="pi pi-trash" process="@this"
-                                         action="#{manageUserBean.deleteUser}">
-                            <f:setPropertyActionListener value="#{user}"
-                                                         target="#{manageUserBean.selectedUser}" />
-
-                            <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?"
-                                       icon="pi pi-exclamation-triangle"/>
-                        </p:commandButton>
-                    </p:column>
+                    
+                    <sec:authorize access="hasAnyAuthority('administrador')">
+                        <p:column exportable="false">
+                            
+                            <p:commandButton icon="pi pi-pencil"
+                                             action="#{manageUserBean.openForEdit}"
+                                             update=":form:manage-user-content"
+                                             oncomplete="PF('manageUserDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success"
+                                             process="@this">
+                                <f:setPropertyActionListener value="#{user}"
+                                                             target="#{manageUserBean.selectedUser}"/>
+                                <p:resetInput target=":form:manage-user-content"/>
+                            </p:commandButton>
+                            
+                            <p:commandButton class="ui-button-warning rounded-button"
+                                             icon="pi pi-trash" process="@this"
+                                             action="#{manageUserBean.deleteUser}">
+                                <f:setPropertyActionListener value="#{user}"
+                                                             target="#{manageUserBean.selectedUser}"/>
+                                
+                                <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?"
+                                           icon="pi pi-exclamation-triangle"/>
+                            </p:commandButton>
+                        </p:column>
+                    </sec:authorize>
                 </p:dataTable>
-
+                
                 <ui:include src="user-form.xhtml"></ui:include>
-
+                
                 <p:confirmDialog global="true" showEffect="fade" width="300">
                     <p:commandButton value="Si" type="button"
                                      styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
