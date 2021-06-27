@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Listado de Usuarios
+    </ui:define>
+    <ui:define name="layout">
+        <h:form>
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-studentForGroup" fileName="Estudiantes por Grupos"/>
+                        </p:commandButton>
+                    
+                    </p:toolbarGroup>
+                </p:toolbar>
+                
+                <p:dataTable id="dt-studentForGroup" widgetVar="dtStudentForGroup" var="student"
+                             reflow="true" paginator="true"
+                             value="#{manageStudentForGroupBean.studentForGroupDtoList}"
+                             rows="50" paginatorPosition="bottom">
+                    
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Estudiantes</span>
+                            <span class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtStudentForGroup').filter()" placeholder="Buscar"/>
+							</span>
+                        </div>
+                    </f:facet>
+                    
+                    
+                    <p:column headerText="Curso" sortBy="#{student.course}" >
+                        <h:outputText value="#{student.course}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Año" sortBy="#{student.yearNumber}">
+                        <h:outputText value="#{student.yearNumber}"/>
+                    </p:column>
+    
+                    <p:column headerText="Grupo" sortBy="#{student.numberGroup}">
+                        <h:outputText value="#{student.numberGroup}" />
+                    </p:column>
+    
+                    <p:column headerText="Nombre" sortBy="#{student.name}" filterBy="#{student.name}">
+                        <h:outputText value="#{student.name}"/>
+                    </p:column>
+    
+                    <p:column headerText="Apellidos" sortBy="#{student.lastName}" filterBy="#{student.lastName}">
+                        <h:outputText value="#{student.lastName}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+            
+            
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
+</html>

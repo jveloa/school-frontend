@@ -40,11 +40,12 @@
                              reflow="true" paginator="true"
                              value="#{manageUserBean.users}"
                              rows="10" paginatorPosition="bottom">
+                    
                     <f:facet name="header">
                         <div class="products-table-header">
                             <span style="font-weight: bold">Usuarios</span>
                             <span
-                                class="filter-container ui-input-icon-left">
+                                 class="filter-container ui-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('dtUsers').filter()" placeholder="Buscar"/>
