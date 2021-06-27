@@ -1,7 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
-import cu.edu.cujae.pweb.dto.UserDto;
-import cu.edu.cujae.pweb.dto.reportDto.StudentForGroupDto;
+import cu.edu.cujae.pweb.dto.reportDto.StudentsByGroupDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
@@ -21,13 +20,13 @@ public class ReportServiceImpl implements ReportService {
     private RestService restService;
 
     @Override
-    public List<StudentForGroupDto> getStudentForGroup() {
-        List<StudentForGroupDto> studentForGrouplist = new ArrayList<>();
+    public List<StudentsByGroupDto> getStudentForGroup() {
+        List<StudentsByGroupDto> studentForGrouplist = new ArrayList<>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<StudentForGroupDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/reports/",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            studentForGrouplist = apiRestMapper.mapList(response,StudentForGroupDto.class);
+            ApiRestMapper<StudentsByGroupDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String)restService.GET("/api/v1/reports/studentsByGroup",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            studentForGrouplist = apiRestMapper.mapList(response, StudentsByGroupDto.class);
         }catch (IOException e){
             e.printStackTrace();
         }

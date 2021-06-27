@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.dto.reportDto;
 
-public class StudentForGroupDto {
+public class StudentsByGroupDto {
     private String course;
     private int yearNumber;
     private String name;
@@ -8,10 +8,10 @@ public class StudentForGroupDto {
     private int numberGroup;
     private int codStudent;
 
-    public StudentForGroupDto() {
+    public StudentsByGroupDto() {
     }
 
-    public StudentForGroupDto(String course, int yearNumber, String name, String lastName, int numberGroup, int codStudent) {
+    public StudentsByGroupDto(String course, int yearNumber, String name, String lastName, int numberGroup, int codStudent) {
         this.course = course;
         this.yearNumber = yearNumber;
         this.name = name;
