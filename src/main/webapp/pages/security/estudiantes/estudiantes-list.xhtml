@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags">
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
@@ -63,8 +64,9 @@
                         <h:outputText value="#{estudiantes.municipality.municipality}"/>
                     </p:column>
 
-                    <p:column exportable="false">
 
+                    <p:column exportable="false">
+                        <sec:authorize access="hasAnyAuthority('administrador')">
                         <p:commandButton icon="pi pi-pencil" action="#{manageEstudiantesBean.openForEdit}"
                                          update=":form:manage-estudiantes-content"
                                          oncomplete="PF('manageEstudiantesDialog').show()"
@@ -83,7 +85,7 @@
                             <p:confirm header="Confirmar" message="Está seguro de eliminar al estudiante?"
                                        icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
-
+                    </sec:authorize>
                         
                            <!-- <h:link   >
                                 Ver Notas
@@ -103,7 +105,7 @@
                                                          target="#{manageNotaBean.selectedStudent}"/>
 
                         </p:commandButton>
-                       
+
 
                     </p:column>
 
