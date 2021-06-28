@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Listado de asignaturas por año
+    </ui:define>
+    <ui:define name="layout">
+        <h:form>
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-subjecstByYear" fileName="Asignaturas por Año" encoding="ISO-8859-1"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                
+                <p:dataTable id="dt-subjecstByYear" widgetVar="dtSubjectsByYear" var="subject"
+                             reflow="true" paginator="true"
+                             value="#{manageSubjectsByYearBean.subjectsByYearList}"
+                             rows="50" paginatorPosition="bottom">
+                    
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Asignaturas</span>
+                            <span class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtSubjectsByYear').filter()" placeholder="Buscar"/>
+							</span>
+                        </div>
+                    </f:facet>
+    
+                    <p:column headerText="Curso" sortBy="#{subject.course}" >
+                        <h:outputText value="#{subject.course}"/>
+                    </p:column>
+    
+                    <p:column headerText="Año" sortBy="#{subject.yearNumber}">
+                        <h:outputText value="#{subject.yearNumber}"/>
+                    </p:column>
+    
+                    <p:column headerText="Nombre" sortBy="#{subject.nameSubject}" filterBy="#{subject.nameSubject}">
+                        <h:outputText value="#{subject.nameSubject}"/>
+                    </p:column>
+    
+                    <p:column headerText="Nombre" sortBy="#{subject.hours}">
+                        <h:outputText value="#{subject.hours}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+            
+            </div>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>
+</html>

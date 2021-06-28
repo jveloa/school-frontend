@@ -30,8 +30,11 @@
             <div class="menu-category">Reportes</div>
             <div class="menu-items">
                 <sec:authorize access="hasAnyAuthority('administrador','usuario')">
-                    <h:link outcome="/pages/security/reports/student-for-group/student-for-group.xhtml">
+                    <h:link outcome="/pages/security/reports/student-by-group/student-by-group.xhtml">
                         Listado de alumnos por grupo
+                    </h:link>
+                    <h:link outcome="/pages/security/reports/subjects-by-year/subjects-by-year.xhtml">
+                        Listado de asignaturas por año
                     </h:link>
                 </sec:authorize>
             </div>

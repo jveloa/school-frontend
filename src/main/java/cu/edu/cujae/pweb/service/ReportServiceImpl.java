@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.reportDto.StudentsByGroupDto;
+import cu.edu.cujae.pweb.dto.reportDto.SubjectsByYearDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
@@ -20,7 +21,7 @@ public class ReportServiceImpl implements ReportService {
     private RestService restService;
 
     @Override
-    public List<StudentsByGroupDto> getStudentForGroup() {
+    public List<StudentsByGroupDto> getStudentByGroup() {
         List<StudentsByGroupDto> studentForGrouplist = new ArrayList<>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -31,6 +32,20 @@ public class ReportServiceImpl implements ReportService {
             e.printStackTrace();
         }
         return studentForGrouplist;
+    }
+
+    @Override
+    public List<SubjectsByYearDto> getSubjectsByYear() {
+        List<SubjectsByYearDto> subjectsByYearList = new ArrayList<>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<SubjectsByYearDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String)restService.GET("/api/v1/reports/subjectsByYear",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            subjectsByYearList = apiRestMapper.mapList(response, SubjectsByYearDto.class);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return subjectsByYearList;
     }
 }
 

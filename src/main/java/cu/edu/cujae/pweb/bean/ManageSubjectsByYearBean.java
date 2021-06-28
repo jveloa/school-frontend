@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 
 import cu.edu.cujae.pweb.dto.reportDto.StudentsByGroupDto;
+import cu.edu.cujae.pweb.dto.reportDto.SubjectsByYearDto;
 import cu.edu.cujae.pweb.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,21 +14,21 @@ import java.util.List;
 @Component
 @ManagedBean
 @ViewScoped
-public class ManageStudentsByGroupBean {
-    private List<StudentsByGroupDto> studentsByGroupDtoList;
+public class ManageSubjectsByYearBean {
+    private List<SubjectsByYearDto> subjectsByYearList;
 
     @Autowired
     private ReportService reportService;
 
-    public ManageStudentsByGroupBean() {
+    public ManageSubjectsByYearBean() {
     }
 
-    public List<StudentsByGroupDto> getStudentsByGroupDtoList() {
-        return reportService.getStudentByGroup();
+    public List<SubjectsByYearDto> getSubjectsByYearList() {
+        return reportService.getSubjectsByYear();
     }
 
-    public void setStudentsByGroupDtoList(List<StudentsByGroupDto> studentsByGroupDtoList) {
-        this.studentsByGroupDtoList = studentsByGroupDtoList;
+    public void setSubjectsByYearList(List<SubjectsByYearDto> subjectsByYearList) {
+        this.subjectsByYearList = subjectsByYearList;
     }
-
 }
+

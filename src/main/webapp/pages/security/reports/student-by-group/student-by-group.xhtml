@@ -7,7 +7,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Listado de Usuarios
+        Listado de estudiantes por grupo
     </ui:define>
     <ui:define name="layout">
         <h:form>
@@ -17,7 +17,7 @@
                         
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-studentForGroup" fileName="Estudiantes por Grupos"/>
+                            <p:dataExporter type="pdf" target="dt-studentForGroup" fileName="Estudiantes por Grupos" encoding="ISO-8859-1"/>
                         </p:commandButton>
                     
                     </p:toolbarGroup>
