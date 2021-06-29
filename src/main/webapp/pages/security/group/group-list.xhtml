@@ -26,7 +26,7 @@
 
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-users" fileName="users"/>
+                            <p:dataExporter type="pdf" target="dt-group" fileName="grupos último curso" encoding="ISO-8859-1"/>
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
@@ -53,7 +53,7 @@
                     <p:column headerText="Grupo" sortBy="#{group.numberGroup}" filterBy="#{group.numberGroup}">
                         <h:outputText value="#{group.numberGroup}"/>
                     </p:column>
-                    <p:column headerText="Ano" sortBy="#{group.year.yearNumber}">
+                    <p:column headerText="Año" sortBy="#{group.year.yearNumber}">
                         <h:outputText value="#{group.year.yearNumber}"/>
                     </p:column>
                     <p:column headerText="Curso" sortBy="#{group.year.course.course}">

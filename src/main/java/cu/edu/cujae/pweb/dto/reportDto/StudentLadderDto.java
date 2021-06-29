@@ -7,6 +7,9 @@ public class StudentLadderDto {
     private int numberGroup;
     private  double avg;
 
+    public StudentLadderDto(){
+
+    }
     public StudentLadderDto(int rank, String name, String lastName, int numberGroup, double avg) {
         this.rank = rank;
         this.name = name;

@@ -27,12 +27,11 @@ public class ManageStudentLadderBean {
     public ManageStudentLadderBean() {
 
     }
-    public void Open(){
-    }
     public void updateList(){
-        studentLadderDtoList = reportService.getStudentLadderDtoList(selectedCourse, yearNumber);
-        PrimeFaces.current().executeScript("PF('ladderDialog').hide()");
-        PrimeFaces.current().ajax().update("form:dt-studentLadder");
+        if(selectedCourse == "" || yearNumber == 0)
+            studentLadderDtoList = new ArrayList<>();
+        else
+            studentLadderDtoList = reportService.getStudentLadderDtoList(selectedCourse, yearNumber);
     }
     public List<StudentLadderDto> getStudentLadderDtoList(){
         return studentLadderDtoList;
