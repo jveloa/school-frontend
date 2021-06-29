@@ -69,4 +69,20 @@ public class GroupServiceImpl  implements GroupService{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean isAssignmentsGroup(int codGroup) throws SQLException {
+        boolean is = false;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<Boolean> apiRestMapper = new ApiRestMapper<>();
+            UriTemplate template = new UriTemplate("/api/v1/groups/isAssignmentsGroup/{codGroup}");
+            String uri = template.expand(codGroup).toString();
+            String response = (String) restService.GET(uri,params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+            is = apiRestMapper.mapOne(response, Boolean.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return is;
+    }
 }

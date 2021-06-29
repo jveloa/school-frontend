@@ -1,6 +1,8 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.dto.CourseDto;
 import cu.edu.cujae.pweb.dto.GroupDto;
+import cu.edu.cujae.pweb.dto.YearDto;
 import cu.edu.cujae.pweb.service.GroupService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -25,7 +27,6 @@ public class ManageGroupBean {
 
 
     public ManageGroupBean() {
-
     }
 
 
@@ -35,6 +36,23 @@ public class ManageGroupBean {
 
 
     public void saveGroup() throws SQLException {
+        int numYear = selectedGroup.getYear().getYearNumber();
+        List<GroupDto> groupsList = groupService.getGroupsLastCourse();
+        int higherGroup = 0;
+        int codYear = 0;
+
+        for (GroupDto groupDto : groupsList) {
+            int year = groupDto.getYear().getYearNumber();
+            if (year == numYear) {
+                if (groupDto.getNumberGroup() > higherGroup) {
+                    higherGroup = groupDto.getNumberGroup();
+                    codYear = groupDto.getYear().getCodYear();
+                }
+            }
+        }
+
+        GroupDto group = new GroupDto(0, new YearDto(codYear, 0, new CourseDto()), higherGroup + 1);
+        groupService.createGroup(group);
         JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_added");
 
         //load datatable again with new values
@@ -43,7 +61,22 @@ public class ManageGroupBean {
         PrimeFaces.current().ajax().update("form:dt-group");
     }
 
-    public void deleteGroup() {
+    public void deleteGroup() throws SQLException {
+        try {
+            groupService.deleteGroup(this.selectedGroup.getCodGroup());
+            this.selectedGroup = null;
+            groups = groupService.getGroupsLastCourse();
+
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_deleted");
+            PrimeFaces.current().ajax().update("form:dt-group");
+        } catch (Exception e) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getNumGroupAndCodYear(int numYear) throws SQLException {
 
     }
 
