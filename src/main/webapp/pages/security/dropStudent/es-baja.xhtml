@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Estudiante Baja
+    </ui:define>
+    <ui:define name="layout">
+        <h:form id="form">
+            <div class="card crud-demo">
+                <p:growl id="message" showDetail="true"/>
+                <div> <p:outputLabel >Ya este estudiante se le ha dado de baja </p:outputLabel></div>
+
+                <p:commandButton value="Continuar" update="message" styleClass="p-mr-2" icon="pi pi-check">
+                </p:commandButton>
+
+                <p:commandButton value="Eliminar de Baja" action="#{manageDropStudentBean.deleteEstudiantes}"  update="message" styleClass="ui-button-danger" icon="pi pi-times">
+                    <p:confirm header="Confirmation" message="Estas seguro que deseas eliminar al estidiante de Baja?" icon="pi pi-info-circle"/>
+                </p:commandButton>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+                </p:confirmDialog>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
