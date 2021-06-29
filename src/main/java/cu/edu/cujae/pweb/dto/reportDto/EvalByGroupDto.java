@@ -9,6 +9,11 @@ public class EvalByGroupDto {
     private String studentLastName;
     private String evaluacion;
 
+    public EvalByGroupDto(){
+
+    }
+
+
     public EvalByGroupDto(String course, int yearNumber, int groupNumber, String subjectName, String studentName, String studentLastName, String evaluacion) {
         this.course = course;
         this.yearNumber = yearNumber;

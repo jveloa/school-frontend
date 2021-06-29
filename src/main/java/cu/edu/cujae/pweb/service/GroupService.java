@@ -9,4 +9,5 @@ public interface GroupService {
     List<GroupDto> getGroupList() throws SQLException;
     void createGroup(GroupDto group) throws SQLException;
     void deleteGroup(int codGroup) throws SQLException;
+    List<GroupDto> getGroupsLastCourse() throws SQLException;
 }

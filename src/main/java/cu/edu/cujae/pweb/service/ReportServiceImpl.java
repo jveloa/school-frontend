@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
+import cu.edu.cujae.pweb.dto.reportDto.EvalByGroupDto;
 import cu.edu.cujae.pweb.dto.reportDto.StudentLadderDto;
 import cu.edu.cujae.pweb.dto.reportDto.StudentsByGroupDto;
 import cu.edu.cujae.pweb.dto.reportDto.SubjectsByYearDto;
@@ -78,6 +79,20 @@ public class ReportServiceImpl implements ReportService {
 
         }
         return studentLadderDtoList;
+    }
+
+    @Override
+    public List<EvalByGroupDto> getEvalByGroup() {
+        List<EvalByGroupDto> evalByGroupDtoList = new ArrayList<>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<EvalByGroupDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String)restService.GET("/api/v1/reports/evalByGroup",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            evalByGroupDtoList = apiRestMapper.mapList(response, EvalByGroupDto.class);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return evalByGroupDtoList;
     }
 
 }
