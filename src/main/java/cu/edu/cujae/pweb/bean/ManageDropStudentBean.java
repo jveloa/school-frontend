@@ -41,7 +41,8 @@ public class ManageDropStudentBean {
     public void openForEdit() {
 
     }
-    public void saveDropStudent() {
+    public String saveDropStudent() {
+        String result=null;
         if (this.selectedDropStudent.getStudent().getCodStudent() == 0) {
 
             //register dropStudent
@@ -49,6 +50,7 @@ public class ManageDropStudentBean {
             dropStudentService.createDropStudent(this.selectedDropStudent);
 
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_baja_added");
+            result="atras";
         } else {
             //edit dropStudent
 
@@ -60,23 +62,28 @@ public class ManageDropStudentBean {
         dropStudentDtoList = dropStudentService.getBajas();
         //PrimeFaces.current().executeScript("PF('manageEstudiantesDialog').hide()");
        // PrimeFaces.current().ajax().update("form:dt-estudiantes");
+        return result;
     }
 
-    public void deleteEstudiantes() {
+    public String deleteEstudiantes() {
+        String result=null;
         try {
             this.selectedDropStudent.getStudent().setCodStudent(this.selectedStudent.getCodStudent());
             //delete student
             dropStudentService.deleteDropStudent(this.selectedDropStudent.getStudent().getCodStudent());
-            this.selectedDropStudent = null;
+            this.selectedDropStudent = new DropStudentDto();
+
 
             //load datatable again with new values
             dropStudentDtoList = dropStudentService.getBajas();
 
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_baja_deleted");
             //PrimeFaces.current().ajax().update("form:dt-estudiantes");
+            result="atras";
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
+        return result;
     }
 
     public DropStudentDto getDropStudent() {

@@ -37,7 +37,22 @@
 		</navigation-case>
 
 	</navigation-rule>
-
+	<navigation-rule>
+		<from-view-id>/pages/security/dropStudent/es-baja.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>atras</from-outcome>
+			<to-view-id>/pages/security/estudiantes/estudiantes-list.xhtml
+			</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/security/dropStudent/no-baja.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>atras</from-outcome>
+			<to-view-id>/pages/security/estudiantes/estudiantes-list.xhtml
+			</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<application>
 	    <action-listener>org.primefaces.application.DialogActionListener</action-listener>
         <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
