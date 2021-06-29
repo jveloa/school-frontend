@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <p:dialog header="Confirmar" showEffect="fade" modal="true"
+              widgetVar="ladderDialog" responsive="true">
+        <p:outputPanel id="manage-ladder-content" class="ui-fluid">
+        <p:outputPanel rendered="#{not empty manageStudentLadderBean.selectedCourse}">
+        <p:panelGrid layout="grid" columns="1">
+        <h:panelGroup>
+
+        <div class="p-field">
+
+        <p:outputLabel for="@next">Curso</p:outputLabel>
+        <p:selectOneMenu id="course" required="true"
+                         value="#{manageStudentLadderBean.selectedCourse}">
+            <f:selectItem itemLabel="2017-2018" itemValue="2017-2018"/>
+            <f:selectItem itemLabel="2018-2019" itemValue="2018-2019"/>
+        </p:selectOneMenu>
+        </div>
+        <div class="p-field">
+
+        <p:outputLabel for="@next">Año</p:outputLabel>
+        <p:selectOneMenu id="year" required="true"
+                         value="#{manageStudentLadderBean.yearNumber}">
+            <f:selectItem itemLabel="1ro" itemValue="1"/>
+            <f:selectItem itemLabel="2do" itemValue="2"/>
+            <f:selectItem itemLabel="3ro" itemValue="3"/>
+        </p:selectOneMenu>
+        </div>
+        <f:facet name="footer">
+    <p:commandButton value="OK" icon="pi pi-check"
+                     actionListener="#{manageStudentLadderBean.updateList}"
+                     update="manage-ladder-content" process="manage-ladder-content @this"/>
+        </f:facet>
+        </h:panelGroup>
+        </p:panelGrid>
+        </p:outputPanel>
+        </p:outputPanel>
+    </p:dialog>
+    <ui:define name="title">
+        Escalafón estudiantil
+    </ui:define>
+    <ui:define name="layout">
+        <h:form>
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton icon="pi pi-check" value="Ver"
+                                         action="#{manageStudentLadderBean.Open}"
+                                         oncomplete="PF('ladderDialog').show()"
+                                         process="@this">
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-studentLadder" fileName="Escalafón estudiantil" encoding="ISO-8859-1"/>
+                        </p:commandButton>
+
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="dt-studentLadder" widgetVar="dtStudentLadder" var="student"
+                             reflow="true" paginator="true"
+                             value="#{manageStudentLadderBean.studentLadderDtoList}"
+                             rows="50" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Estudiantes</span>
+                            <span class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtStudentLadder').filter()" placeholder="Buscar"/>
+							</span>
+                        </div>
+                    </f:facet>
+
+
+                    <p:column headerText="Posición" sortBy="#{student.rank}" >
+                        <h:outputText value="#{student.rank}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre" sortBy="#{student.name}" filterBy="#{student.name}">
+                        <h:outputText value="#{student.name}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos" sortBy="#{student.lastName}" filterBy="#{student.lastName}">
+                        <h:outputText value="#{student.lastName}"/>
+                    </p:column>
+                    <p:column headerText="Grupo" sortBy="#{student.numberGroup}" filterBy="#{student.numberGroup}">
+                        <h:outputText value="#{student.numberGroup}"/>
+                    </p:column>
+                    <p:column headerText="Promedio" sortBy="#{student.avg}" filterBy="#{student.avg}">
+                        <h:outputText value="#{student.avg}"/>
+                    </p:column>
+                </p:dataTable>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
+</html>
