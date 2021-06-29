@@ -23,7 +23,20 @@
 			</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/security/estudiantes/estudiantes-list.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>esBaja</from-outcome>
+			<to-view-id>/pages/security/dropStudent/es-baja.xhtml
+			</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>noBaja</from-outcome>
+			<to-view-id>/pages/security/dropStudent/no-baja.xhtml
+			</to-view-id>
+		</navigation-case>
 
+	</navigation-rule>
 
 	<application>
 	    <action-listener>org.primefaces.application.DialogActionListener</action-listener>

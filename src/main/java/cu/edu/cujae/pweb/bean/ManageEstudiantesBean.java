@@ -10,9 +10,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
 
+import cu.edu.cujae.pweb.dto.DropStudentDto;
 import cu.edu.cujae.pweb.dto.GenderDto;
 import cu.edu.cujae.pweb.dto.MunicipalityDto;
 import cu.edu.cujae.pweb.dto.StudentDto;
+import cu.edu.cujae.pweb.service.DropStudentService;
 import cu.edu.cujae.pweb.service.EstudiantesService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,8 @@ public class ManageEstudiantesBean {
 
     @Autowired
     private EstudiantesService estudiantesService;
-
+    @Autowired
+    private DropStudentService dropStudentService;
 
 
     public ManageEstudiantesBean() {
@@ -57,7 +60,7 @@ public class ManageEstudiantesBean {
 
     public void saveEstudiantes() {
         if (this.selectedEstudiantes.getCodStudent() == 0) {
-            this.selectedEstudiantes.setCodStudent((int) (Math.random()*100)+1);
+
             //register student
             estudiantesService.createEstudiantes(this.selectedEstudiantes);
 
@@ -123,4 +126,5 @@ public class ManageEstudiantesBean {
     public void setEstudiantesService(EstudiantesService estudiantesService) {
         this.estudiantesService = estudiantesService;
     }
+
 }
