@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,15 +54,17 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<StudentLadderDto> getStudentLadderDtoList(String course, int year) {
         List<StudentLadderDto> studentLadderDtoList = new ArrayList<StudentLadderDto>();
-        /*try {
+        try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            UriTemplate template = new UriTemplate("/api/v1/reports//studentLadder/{curso}/{anno}");
+            String uri = template.expand(course, year).toString();
             ApiRestMapper<StudentLadderDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/reports/studentLadder",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String)restService.GET(uri,params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
             studentLadderDtoList = apiRestMapper.mapList(response, StudentLadderDto.class);
         }catch (IOException e){
             e.printStackTrace();
-        }*/
-        if(course.equalsIgnoreCase("2017-2018")) {
+        }
+        /*if(course.equalsIgnoreCase("2017-2018")) {
             if (year == 1)
             studentLadderDtoList.add(new StudentLadderDto(1, "Abel", "Belda", 31, 4.56));
             if(year == 2)
@@ -77,7 +80,7 @@ public class ReportServiceImpl implements ReportService {
             if(year ==3)
                 studentLadderDtoList.add(new StudentLadderDto(3, "3ra", "Be1111lda", 31, 4.23));
 
-        }
+        }*/
         return studentLadderDtoList;
     }
 

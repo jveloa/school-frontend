@@ -6,42 +6,7 @@
 >
 
 <ui:composition template="/pages/template/layout.xhtml">
-    <p:dialog header="Confirmar" showEffect="fade" modal="true"
-              widgetVar="ladderDialog" responsive="true">
-        <p:outputPanel id="manage-ladder-content" class="ui-fluid">
-        <p:outputPanel rendered="#{not empty manageStudentLadderBean.selectedCourse}">
-        <p:panelGrid layout="grid" columns="1">
-        <h:panelGroup>
 
-        <div class="p-field">
-
-        <p:outputLabel for="@next">Curso</p:outputLabel>
-        <p:selectOneMenu id="course" required="true"
-                         value="#{manageStudentLadderBean.selectedCourse}">
-            <f:selectItem itemLabel="2017-2018" itemValue="2017-2018"/>
-            <f:selectItem itemLabel="2018-2019" itemValue="2018-2019"/>
-        </p:selectOneMenu>
-        </div>
-        <div class="p-field">
-
-        <p:outputLabel for="@next">Año</p:outputLabel>
-        <p:selectOneMenu id="year" required="true"
-                         value="#{manageStudentLadderBean.yearNumber}">
-            <f:selectItem itemLabel="1ro" itemValue="1"/>
-            <f:selectItem itemLabel="2do" itemValue="2"/>
-            <f:selectItem itemLabel="3ro" itemValue="3"/>
-        </p:selectOneMenu>
-        </div>
-        <f:facet name="footer">
-    <p:commandButton value="OK" icon="pi pi-check"
-                     actionListener="#{manageStudentLadderBean.updateList}"
-                     update="manage-ladder-content" process="manage-ladder-content @this"/>
-        </f:facet>
-        </h:panelGroup>
-        </p:panelGrid>
-        </p:outputPanel>
-        </p:outputPanel>
-    </p:dialog>
     <ui:define name="title">
         Escalafón estudiantil
     </ui:define>
@@ -50,11 +15,24 @@
             <div class="card crud-demo">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton icon="pi pi-check" value="Ver"
-                                         action="#{manageStudentLadderBean.Open}"
-                                         oncomplete="PF('ladderDialog').show()"
-                                         process="@this">
-                        </p:commandButton>
+                        <p:selectOneMenu id="course" required="true"
+                                         value="#{manageStudentLadderBean.selectedCourse}" >
+                            <p:ajax listener="#{manageStudentLadderBean.updateList}" update="dt-studentLadder"/>
+                            <f:selectItem itemLabel="Seleccione un curso" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="2017-2018" itemValue="2017-2018"/>
+                            <f:selectItem itemLabel="2018-2019" itemValue="2018-2019"/>
+                        </p:selectOneMenu>
+
+                    </p:toolbarGroup>
+                    <p:toolbarGroup>
+                        <p:selectOneMenu id="year" required="true"
+                                         value="#{manageStudentLadderBean.yearNumber}">
+                            <p:ajax listener="#{manageStudentLadderBean.updateList}" update="dt-studentLadder"/>
+                            <f:selectItem itemLabel="Seleccione un año" itemValue="0" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="1ro" itemValue="1"/>
+                            <f:selectItem itemLabel="2do" itemValue="2"/>
+                            <f:selectItem itemLabel="3ro" itemValue="3"/>
+                        </p:selectOneMenu>
                     </p:toolbarGroup>
                     <p:toolbarGroup>
 
