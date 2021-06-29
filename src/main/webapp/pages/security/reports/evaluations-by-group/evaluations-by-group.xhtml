@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Listado de evaluaciones por grupo
+    </ui:define>
+    <ui:define name="layout">
+        <h:form>
+            <div class="card crud-demo">
+                <p:toolbar>
+                    <p:toolbarGroup>
+
+                        <p:commandButton value="Export" icon="pi pi-upload"
+                                         styleClass="ui-button-help" ajax="false">
+                            <p:dataExporter type="pdf" target="dt-evalByGroup" fileName="Evaluaciones por Grupos" encoding="ISO-8859-1"/>
+                        </p:commandButton>
+
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="dt-evalByGroup" widgetVar="dtEvalByGroup" var="eval"
+                             reflow="true" paginator="true"
+                             value="#{manageEvalByGroupDto.evalByGroupDtoList}"
+                             rows="50" paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Evaluaciones</span>
+                            <span class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtEvalByGroup').filter()" placeholder="Buscar"/>
+							</span>
+                        </div>
+                    </f:facet>
+
+
+                    <p:column headerText="Grupo" sortBy="#{eval.groupNumber}" filterBy="#{eval.groupNumber}">
+                        <h:outputText value="#{eval.groupNumber}" />
+                    </p:column>
+                    <p:column headerText="Nombre" sortBy="#{eval.studentName}" filterBy="#{eval.studentName}">
+                        <h:outputText value="#{eval.studentName}"/>
+                    </p:column>
+
+                    <p:column headerText="Apellidos" sortBy="#{eval.studentLastName}" filterBy="#{eval.studentLastName}">
+                        <h:outputText value="#{eval.studentLastName}"/>
+                    </p:column>
+                    <p:column headerText="Asignatura" sortBy="#{eval.subjectName}" filterBy="#{eval.subjectName}">
+                        <h:outputText value="#{eval.subjectName}" />
+                    </p:column>
+
+                    <p:column headerText="Evaluacion" sortBy="#{eval.evaluacion}">
+                        <h:outputText value="#{eval.evaluacion}" />
+                    </p:column>
+
+                    <p:column headerText="Curso" sortBy="#{eval.course}" >
+                        <h:outputText value="#{eval.course}"/>
+                    </p:column>
+
+                    <p:column headerText="Año" sortBy="#{eval.yearNumber}">
+                        <h:outputText value="#{eval.yearNumber}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
+</html>
