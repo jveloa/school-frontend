@@ -17,9 +17,8 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class ManageGroupBean {
-    private GroupDto grupoDto;
-    private GroupDto selectedGrupo;
-    private List<GroupDto> grupos;
+    private GroupDto selectedGroup;
+    private List<GroupDto> groups;
 
     @Autowired
     private GroupService groupService;
@@ -31,19 +30,15 @@ public class ManageGroupBean {
 
 
     public void openNew() {
-        this.selectedGrupo = new GroupDto();
+        this.selectedGroup = new GroupDto();
     }
 
 
     public void saveGroup() throws SQLException {
-
-
-        groupService.createGroup(this.selectedGrupo);
-
         JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_added");
 
         //load datatable again with new values
-        grupos = groupService.getGroupList();
+        groups = groupService.getGroupList();
         PrimeFaces.current().executeScript("PF('manageGroupDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-group");
     }
@@ -52,29 +47,27 @@ public class ManageGroupBean {
 
     }
 
-
-    public GroupDto getGrupoDto() {
-        return grupoDto;
+    public GroupDto getSelectedGroup() {
+        return selectedGroup;
     }
 
-    public void setGrupoDto(GroupDto grupoDto) {
-        this.grupoDto = grupoDto;
+    public void setSelectedGroup(GroupDto selectedGroup) {
+        this.selectedGroup = selectedGroup;
     }
 
-    public GroupDto getSelectedGrupo() {
-        return selectedGrupo;
+    public List<GroupDto> getGroups() throws SQLException {
+        return groupService.getGroupsLastCourse();
     }
 
-    public void setSelectedGrupo(GroupDto selectedGrupo) {
-        this.selectedGrupo = selectedGrupo;
+    public void setGroups(List<GroupDto> groups) {
+        this.groups = groups;
     }
 
-    public List<GroupDto> getGrupos() throws SQLException {
-        grupos = groupService.getGroupList();
-        return grupos;
+    public GroupService getGroupService() {
+        return groupService;
     }
 
-    public void setGrupos(List<GroupDto> grupos) {
-        this.grupos = grupos;
+    public void setGroupService(GroupService groupService) {
+        this.groupService = groupService;
     }
 }
