@@ -26,7 +26,7 @@
 
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-users" fileName="users"/>
+                            <p:dataExporter type="pdf" target="dt-group" fileName="grupos último curso" encoding="ISO-8859-1"/>
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
@@ -34,7 +34,7 @@
 
                 <p:dataTable id="dt-group" widgetVar="dtGroup" var="group"
                              reflow="true" paginator="true"
-                             value="#{manageGroupBean.grupos}"
+                             value="#{manageGroupBean.groups}"
                              rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
@@ -53,8 +53,8 @@
                     <p:column headerText="Grupo" sortBy="#{group.numberGroup}" filterBy="#{group.numberGroup}">
                         <h:outputText value="#{group.numberGroup}"/>
                     </p:column>
-                    <p:column headerText="Ano" sortBy="#{group.year.yearNumber}">
-                        <h:outputText value="#{group.year.codYear}"/>
+                    <p:column headerText="Año" sortBy="#{group.year.yearNumber}">
+                        <h:outputText value="#{group.year.yearNumber}"/>
                     </p:column>
                     <p:column headerText="Curso" sortBy="#{group.year.course.course}">
                         <h:outputText value="#{group.year.course.course}"/>
@@ -66,7 +66,7 @@
                                          icon="pi pi-trash" process="@this"
                                          action="#{manageGroupBean.deleteGroup}">
                             <f:setPropertyActionListener value="#{group}"
-                                                         target="#{manageGroupBean.selectedGrupo}" />
+                                                         target="#{manageGroupBean.selectedGroup}" />
 
                             <p:confirm header="Confirmar" message="Está seguro de eliminar al grupo?"
                                        icon="pi pi-exclamation-triangle"/>

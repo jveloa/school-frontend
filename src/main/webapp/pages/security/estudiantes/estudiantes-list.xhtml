@@ -93,18 +93,23 @@
                                                              target="#{manageEstudiantesBean.selectedEstudiantes}"/>
                             </h:link>-->
 
-                        <p:commandButton style="margin-right: .5rem; background: #2196F3;margin-top: .5rem; float: left;
-                         color: white; border-radius: 5px;"
-                                         action="/pages/security/notas/nota-list.xhtml"
-                                         update=":form:manage-estudiantes-content"
-                                         oncomplete="PF('manageEstudiantesDialog').show()"
-                                         process="@this"
-
-                        value="Ver Notas">
+                        <p:commandButton id="Mas" value="Mas" type="button" icon="pi pi-plus"/>
+                        <p:tieredMenu overlay="true" trigger="Mas" my="left top" at="left bottom" style="width:200px">
+                        <p:menuitem value="Ver Notas" action="/pages/security/notas/nota-list.xhtml"
+                                    update=":form:manage-estudiantes-content"
+                                    oncomplete="PF('manageEstudiantesDialog').show()"
+                                    process="@this" icon="pi pi-list">
                             <f:setPropertyActionListener value="#{estudiantes}"
                                                          target="#{manageNotaBean.selectedStudent}"/>
+                            </p:menuitem>
+                        <p:menuitem value="Dar Baja" action="#{manageDropStudentBean.siOnoBaja}"
+                                    update=":form:manage-estudiantes-content"
+                                    oncomplete="PF('manageEstudiantesDialog').show()" icon="pi pi-user-minus">
+                            <f:setPropertyActionListener value="#{estudiantes}"
+                                                         target="#{manageDropStudentBean.selectedStudent}"/>
+                        </p:menuitem>
+                        </p:tieredMenu>
 
-                        </p:commandButton>
 
 
                     </p:column>

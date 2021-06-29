@@ -4,18 +4,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog header="Grupos" showEffect="fade" modal="true"
+    <p:dialog header="Insertar grupo en el año:" showEffect="fade" modal="true"
               widgetVar="manageGroupDialog" responsive="true">
         <p:outputPanel id="manage-group-content" class="ui-fluid" >
-            <p:outputPanel rendered="#{not empty manageGroupBean.selectedGrupo}" >
+            <p:outputPanel rendered="#{not empty manageGroupBean.selectedGroup}" >
                 <p:panelGrid layout="grid" columns="1"  >
-                    <h:panelGroup >
-                        
+                    <h:panelGroup>
 
                         <div class="p-field">
                             <p:outputLabel for="@next">Year</p:outputLabel>
                             <p:selectOneMenu id="year" required="true"
-                                             value="#{manageGroupBean.selectedGrupo.year.yearNumber}">
+                                             value="#{manageGroupBean.selectedGroup.year.yearNumber}">
                                 <f:selectItem itemLabel="1ro" itemValue="1"/>
                                 <f:selectItem itemLabel="2do" itemValue="2"/>
                                 <f:selectItem itemLabel="3ro" itemValue="3"/>
@@ -33,7 +32,8 @@
         <f:facet name="footer">
             <p:commandButton value="Salvar" icon="pi pi-check"
                              actionListener="#{manageGroupBean.saveGroup}"
-                             update="manage-group-content" process="manage-group-content @this" />
+                             update="manage-group-content" process="manage-group-content @this"
+            />
             <p:commandButton value="Cancelar" icon="pi pi-times"
                              onclick="PF('manageGroupDialog').hide()" class="ui-button-secondary" />
         </f:facet>
