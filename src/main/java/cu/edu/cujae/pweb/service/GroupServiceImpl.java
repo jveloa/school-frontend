@@ -12,6 +12,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,20 @@ public class GroupServiceImpl  implements GroupService{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<GroupDto> apiRestMapper = new ApiRestMapper<>();
             String response = (String)restService.GET("/api/v1/groups/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            groupList = apiRestMapper.mapList(response, GroupDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return groupList;
+    }
+
+    @Override
+    public List<GroupDto> getGroupsLastCourse() throws SQLException {
+        List<GroupDto> groupList = new ArrayList<GroupDto>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<GroupDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String)restService.GET("/api/v1/groups/groupsLastCourse", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             groupList = apiRestMapper.mapList(response, GroupDto.class);
         } catch (IOException e) {
             e.printStackTrace();

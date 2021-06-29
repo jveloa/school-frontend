@@ -1,7 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
-import cu.edu.cujae.pweb.dto.*;
-import cu.edu.cujae.pweb.service.EstudiantesService;
+import cu.edu.cujae.pweb.dto.GroupDto;
 import cu.edu.cujae.pweb.service.GroupService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -26,33 +25,22 @@ public class ManageGroupBean {
     private GroupService groupService;
 
 
-
     public ManageGroupBean() {
 
     }
 
 
-
-
     public void openNew() {
         this.selectedGrupo = new GroupDto();
-        this.selectedGrupo.setYear(new YearDto());
-        this.selectedGrupo.getYear().setCourse(new CourseDto());
     }
 
-
-    public void openForEdit() {
-
-    }
 
     public void saveGroup() throws SQLException {
-        if (this.selectedGrupo.getCodGroup() == 0) {
-            this.selectedGrupo.setCodGroup((int) (Math.random()*100)+1);
-            //register group
-            groupService.createGroup(this.selectedGrupo);
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_added");
-        }
+
+        groupService.createGroup(this.selectedGrupo);
+
+        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_added");
 
         //load datatable again with new values
         grupos = groupService.getGroupList();
@@ -61,19 +49,7 @@ public class ManageGroupBean {
     }
 
     public void deleteGroup() {
-        try {
-            //delete groups
-            groupService.deleteGroup(this.selectedGrupo.getCodGroup());
-            this.selectedGrupo = null;
 
-            //load datatable again with new values
-            grupos = groupService.getGroupList();
-
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_deleted");
-            PrimeFaces.current().ajax().update("form:dt-group");
-        } catch (Exception e) {
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
-        }
     }
 
 
@@ -94,7 +70,7 @@ public class ManageGroupBean {
     }
 
     public List<GroupDto> getGrupos() throws SQLException {
-        grupos=groupService.getGroupList();
+        grupos = groupService.getGroupList();
         return grupos;
     }
 
