@@ -10,38 +10,20 @@
             <p:outputPanel rendered="#{not empty manageGroupBean.selectedGrupo}" >
                 <p:panelGrid layout="grid" columns="1"  >
                     <h:panelGroup >
-
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Grupo</p:outputLabel>
-                            <p:inputText id="grupo" required="true"
-                                         value="#{manageGroupBean.selectedGrupo.numberGroup}"
-                            />
-                            <p:message for="@previous"></p:message>
-                        </div>
+                        
 
                         <div class="p-field">
                             <p:outputLabel for="@next">Year</p:outputLabel>
                             <p:selectOneMenu id="year" required="true"
                                              value="#{manageGroupBean.selectedGrupo.year.yearNumber}">
-                                <f:selectItem itemLabel="" itemValue=""/>
                                 <f:selectItem itemLabel="1ro" itemValue="1"/>
                                 <f:selectItem itemLabel="2do" itemValue="2"/>
                                 <f:selectItem itemLabel="3ro" itemValue="3"/>
                                 <f:selectItem itemLabel="4to" itemValue="4"/>
-
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Curso</p:outputLabel>
-                            <p:selectOneMenu id="course" required="true"
-                                             value="#{manageGroupBean.selectedGrupo.year.course.codCourse}">
-                                <f:selectItem itemLabel="2017-2018" itemValue="1"/>
-                                <f:selectItem itemLabel="2018-2019" itemValue="2"/>
-                            </p:selectOneMenu>
-                            <p:message for="@previous"></p:message>
-                        </div>
-
+                        
                     </h:panelGroup>
 
                 </p:panelGrid>

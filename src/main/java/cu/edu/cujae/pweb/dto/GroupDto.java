@@ -6,6 +6,7 @@ public class GroupDto {
     private int numberGroup;
 
     public GroupDto() {
+        this.year = new YearDto();
     }
 
     public GroupDto(int codGroup, YearDto year, int numberGroup) {
