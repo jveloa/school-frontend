@@ -1,18 +1,18 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-
+    
     <div class="layout-topbar">
         <a class="menu-button" tabindex="0">
             <i class="pi pi-bars"></i>
         </a>
-        <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+        <h:link styleClass="text-secondary" style="width: max-content" outcome="/pages/welcome/welcome.xhtml">
             <p>Control de la docencia</p>
         </h:link>
-
+        
         <h:form styleClass="topbar-form">
             <ul class="topbar-menu">
                 <li>
-                    <p:outputLabel style="padding-left:5px;"> #{userBean.userLogued}</p:outputLabel>
+                    <p:outputLabel style="padding-left:5px;">#{userBean.userLogued}</p:outputLabel>
                 </li>
                 <li>
                     <p:commandLink action="#{userBean.logout}" ajax="false" ><i class="pi pi-sign-out" ></i> Salir</p:commandLink>
