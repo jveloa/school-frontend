@@ -3,6 +3,7 @@ package cu.edu.cujae.pweb.bean;
 import cu.edu.cujae.pweb.dto.CourseDto;
 import cu.edu.cujae.pweb.dto.SubjectDto;
 import cu.edu.cujae.pweb.dto.YearDto;
+import cu.edu.cujae.pweb.service.CourseService;
 import cu.edu.cujae.pweb.service.SubjectService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -24,13 +25,20 @@ public class ManageSubjectBean {
     private List<SubjectDto> subjects;
     private SubjectDto selectedSubject;
     private SubjectDto subjectDto;
+    private List<CourseDto> courses;
 
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private CourseService courseService;
+
     public ManageSubjectBean() {
     }
-
+    public List<CourseDto> getCourses() {
+        courses = courseService.getCourses();
+        return courses;
+    }
     public List<SubjectDto> getSubjects() {
         subjects = subjectService.getSubjects();
         return subjects;

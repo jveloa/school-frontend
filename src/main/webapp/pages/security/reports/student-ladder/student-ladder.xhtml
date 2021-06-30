@@ -16,19 +16,22 @@
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:selectOneMenu id="course" required="true"
-                                         value="#{manageStudentLadderBean.selectedCourse}" >
+                                         value="#{manageStudentLadderBean.selectedCourse}"
+                                         hideNoSelectionOption="#{not empty manageStudentLadderBean.hide}">
                             <p:ajax listener="#{manageStudentLadderBean.updateList}" update="dt-studentLadder"/>
-                            <f:selectItem itemLabel="Seleccione un curso" itemValue="" noSelectionOption="true"/>
-                            <f:selectItem itemLabel="2017-2018" itemValue="2017-2018"/>
-                            <f:selectItem itemLabel="2018-2019" itemValue="2018-2019"/>
+                            <p:ajax process="@this" update="@this"/>
+                            <f:selectItem itemLabel="Seleccione un curso" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{manageStudentLadderBean.courses}" var="cou" itemLabel="#{cou.course}" itemValue="#{cou.course}"/>
                         </p:selectOneMenu>
 
                     </p:toolbarGroup>
                     <p:toolbarGroup>
                         <p:selectOneMenu id="year" required="true"
-                                         value="#{manageStudentLadderBean.yearNumber}">
+                                         value="#{manageStudentLadderBean.yearNumber}"
+                                         hideNoSelectionOption="#{not empty manageStudentLadderBean.hide}">
                             <p:ajax listener="#{manageStudentLadderBean.updateList}" update="dt-studentLadder"/>
-                            <f:selectItem itemLabel="Seleccione un año" itemValue="0" noSelectionOption="true"/>
+                            <p:ajax process="@this" update="@this"/>
+                            <f:selectItem itemLabel="Seleccione un año" itemValue="#{null}" noSelectionOption="true"/>
                             <f:selectItem itemLabel="1ro" itemValue="1"/>
                             <f:selectItem itemLabel="2do" itemValue="2"/>
                             <f:selectItem itemLabel="3ro" itemValue="3"/>
