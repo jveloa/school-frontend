@@ -19,7 +19,11 @@
                 <div>
                     <p:outputLabel for="@next">Motivo de la Baja:  </p:outputLabel>
                     <p:selectOneMenu id="motivo"  value="#{manageDropStudentBean.selectedDropStudent.reasonDrop.codReason}">
-                        <f:selectItems value="#{manageDropStudentBean.list}" var="reasonDrop" itemLabel="#{reasonDrop.reason}" itemValue="#{reasonDrop.codReason}"/>
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="Culminacion de estudios" itemValue="7"/>
+                        <f:selectItem itemLabel="Enfermedad" itemValue="8"/>
+                        <f:selectItem itemLabel="Traslado" itemValue="9"/>
+                        <f:selectItem itemLabel="Suspender año por segunda vez" itemValue="10"/>
                     </p:selectOneMenu>
                     <p:message for="@previous"></p:message>
                 </div>

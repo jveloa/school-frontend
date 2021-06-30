@@ -151,7 +151,7 @@ public class ManageEstudiantesBean {
         this.grupo = grupo;
     }
     public List<GroupDto> getCombobox() throws SQLException {
-        combobox=groupService.getGroupsLastCourse();
+        this.combobox=groupService.getGroupsLastCourse();
         return combobox;
     }
 
@@ -159,7 +159,7 @@ public class ManageEstudiantesBean {
         this.combobox = combobox;
     }
     public List<GenderDto> getLista1() {
-        lista1=genderService.getGenderList();
+        this.lista1=genderService.getGenderList();
         return lista1;
     }
 
@@ -167,8 +167,8 @@ public class ManageEstudiantesBean {
         this.lista1 = lista1;
     }
 
-    public List<MunicipalityDto> getLista2() {
-        lista2=municipalityService.getMunicipalityList();
+   public List<MunicipalityDto> getLista2() {
+       this.lista2=municipalityService.getMunicipalityList();
         return lista2;
     }
 
