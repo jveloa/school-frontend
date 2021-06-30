@@ -4,6 +4,7 @@ import cu.edu.cujae.pweb.dto.DropStudentDto;
 import cu.edu.cujae.pweb.dto.ReasonDropDto;
 import cu.edu.cujae.pweb.dto.StudentDto;
 import cu.edu.cujae.pweb.service.DropStudentService;
+import cu.edu.cujae.pweb.service.ReasonDropService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,14 @@ public class ManageDropStudentBean {
     private  DropStudentDto selectedDropStudent=new DropStudentDto(new ReasonDropDto(),new StudentDto());
     private List<DropStudentDto> dropStudentDtoList;
     private StudentDto selectedStudent;
+    private List<ReasonDropDto> list;
 
 
 
     @Autowired
     DropStudentService dropStudentService;
+    @Autowired
+    ReasonDropService reasonDropService;
 
     public ManageDropStudentBean(){
 
@@ -43,7 +47,9 @@ public class ManageDropStudentBean {
     }
     public String saveDropStudent() {
         String result=null;
-        if (this.selectedDropStudent.getStudent().getCodStudent() == 0) {
+        if (this.selectedDropStudent.getReasonDrop().getCodReason()==0){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_baja_error");}
+        else if (this.selectedDropStudent.getStudent().getCodStudent() == 0) {
 
             //register dropStudent
             this.selectedDropStudent.getStudent().setCodStudent(this.selectedStudent.getCodStudent());
@@ -72,7 +78,7 @@ public class ManageDropStudentBean {
             //delete student
             dropStudentService.deleteDropStudent(this.selectedDropStudent.getStudent().getCodStudent());
             this.selectedDropStudent = new DropStudentDto();
-
+            this.selectedDropStudent.setReasonDrop(new ReasonDropDto());
 
             //load datatable again with new values
             dropStudentDtoList = dropStudentService.getBajas();
@@ -137,4 +143,12 @@ public class ManageDropStudentBean {
         return result;
     }
 
+    public List<ReasonDropDto> getList() {
+        list=reasonDropService.getReasonDropList();
+        return list;
+    }
+
+    public void setList(List<ReasonDropDto> list) {
+        this.list = list;
+    }
 }

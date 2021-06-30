@@ -12,10 +12,7 @@ import javax.faces.view.ViewScoped;
 
 
 import cu.edu.cujae.pweb.dto.*;
-import cu.edu.cujae.pweb.service.DropStudentService;
-import cu.edu.cujae.pweb.service.EstudiantesService;
-import cu.edu.cujae.pweb.service.GroupService;
-import cu.edu.cujae.pweb.service.RecordService;
+import cu.edu.cujae.pweb.service.*;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +30,8 @@ public class ManageEstudiantesBean {
     private GroupDto grupo;
     private List<GroupDto>combobox;
     private List<StudentDto> lista;
+    private List<GenderDto> lista1;
+    private List<MunicipalityDto> lista2;
 
 
 
@@ -44,6 +43,10 @@ public class ManageEstudiantesBean {
     private RecordService recordService;
     @Autowired
     private GroupService groupService;
+    @Autowired
+    private MunicipalityService municipalityService;
+    @Autowired
+    private  GenderService genderService;
 
     public ManageEstudiantesBean() {
 
@@ -154,5 +157,22 @@ public class ManageEstudiantesBean {
 
     public void setCombobox(List<GroupDto> combobox) {
         this.combobox = combobox;
+    }
+    public List<GenderDto> getLista1() {
+        lista1=genderService.getGenderList();
+        return lista1;
+    }
+
+    public void setLista1(List<GenderDto> lista1) {
+        this.lista1 = lista1;
+    }
+
+    public List<MunicipalityDto> getLista2() {
+        lista2=municipalityService.getMunicipalityList();
+        return lista2;
+    }
+
+    public void setLista2(List<MunicipalityDto> lista2) {
+        this.lista2 = lista2;
     }
 }
