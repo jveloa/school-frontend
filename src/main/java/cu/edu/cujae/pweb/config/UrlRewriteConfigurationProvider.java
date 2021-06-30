@@ -15,11 +15,16 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider {
     public Configuration getConfiguration(ServletContext context) {
         return ConfigurationBuilder.begin()
 
-            .addRule(Join.path("/bienvenido").to("/pages/welcome/welcome.jsf"))
-            .addRule(Join.path("/usuarios").to("/pages/security/users/user-list.jsf"))
-            .addRule(Join.path("/estudiantes").to("/pages/security/estudiantes/estudiantes-list.jsf"))
-            .addRule(Join.path("/asignaturas").to("/pages/security/subjects/subject-list.jsf"))
-            .addRule(Join.path("/notas").to("/pages/security/notas/nota-list.jsf"));
+            .addRule(Join.path("/welcome").to("/pages/welcome/welcome.jsf"))
+            .addRule(Join.path("/users").to("/pages/security/users/user-list.jsf"))
+            .addRule(Join.path("/students").to("/pages/security/estudiantes/estudiantes-list.jsf"))
+            .addRule(Join.path("/subjects").to("/pages/security/subjects/subject-list.jsf"))
+            .addRule(Join.path("/evalution").to("/pages/security/notas/nota-list.jsf"))
+            .addRule(Join.path("/groups").to("/pages/security/group/group-list.jsf"))
+            .addRule(Join.path("/students_by_groups").to("/pages/security/reports/student-by-group/student-by-group.jsf"))
+            .addRule(Join.path("/subjects_by_years").to("/pages/security/reports/subjects-by-year/subjects-by-year.jsf"))
+            .addRule(Join.path("/evaluations_by_groups").to("/pages/security/reports/evaluations-by-group/evaluations-by-group.jsf"))
+            .addRule(Join.path("/student_ladder").to("/pages/security/reports/student-ladder/student-ladder.jsf"));
     }
 
     @Override
