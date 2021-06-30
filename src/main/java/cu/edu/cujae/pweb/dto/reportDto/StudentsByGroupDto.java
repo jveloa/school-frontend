@@ -17,6 +17,9 @@ public class StudentsByGroupDto {
         this.codStudent = codStudent;
     }
 
+    public StudentsByGroupDto() {
+    }
+
     public String getCourse() {
         return course;
     }
