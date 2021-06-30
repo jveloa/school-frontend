@@ -64,23 +64,6 @@ public class ReportServiceImpl implements ReportService {
         }catch (IOException e){
             e.printStackTrace();
         }
-        /*if(course.equalsIgnoreCase("2017-2018")) {
-            if (year == 1)
-            studentLadderDtoList.add(new StudentLadderDto(1, "Abel", "Belda", 31, 4.56));
-            if(year == 2)
-            studentLadderDtoList.add(new StudentLadderDto(2, "Abael", "Be33lda", 31, 4.53));
-            if(year ==3)
-            studentLadderDtoList.add(new StudentLadderDto(3, "Abeaaaal", "Be1111lda", 31, 4.23));
-        }
-        else{
-            if (year == 1)
-                studentLadderDtoList.add(new StudentLadderDto(1, "tatata", "Belda", 31, 4.56));
-            if(year == 2)
-                studentLadderDtoList.add(new StudentLadderDto(2, "asd", "Be33lda", 31, 4.53));
-            if(year ==3)
-                studentLadderDtoList.add(new StudentLadderDto(3, "3ra", "Be1111lda", 31, 4.23));
-
-        }*/
         return studentLadderDtoList;
     }
 

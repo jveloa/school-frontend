@@ -36,8 +36,7 @@
                             <p:outputLabel for="@next">Curso</p:outputLabel>
                             <p:selectOneMenu id="course" required="true"
                                          value="#{manageSubjectBean.selectedSubject.year.course.codCourse}">
-                                <f:selectItem itemLabel="2017-2018" itemValue="1"/>
-                                <f:selectItem itemLabel="2018-2019" itemValue="2"/>
+                                <f:selectItems value="#{manageSubjectBean.courses}" var="cou" itemLabel="#{cou.course}" itemValue="#{cou.codCourse}"/>
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
