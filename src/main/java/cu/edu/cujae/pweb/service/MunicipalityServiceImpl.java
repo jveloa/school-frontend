@@ -26,7 +26,7 @@ public class MunicipalityServiceImpl implements MunicipalityService{
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<MunicipalityDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/municipality/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String)restService.GET("/api/v1/municipality", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             municipalityList = apiRestMapper.mapList(response, MunicipalityDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class MunicipalityServiceImpl implements MunicipalityService{
     @Override
     public void createGroup(MunicipalityDto municipality){
         try{
-            restService.POST("/api/v1/municipality/",municipality,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+            restService.POST("/api/v1/municipality",municipality,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         }catch (Exception e ){
             e.printStackTrace();
         }

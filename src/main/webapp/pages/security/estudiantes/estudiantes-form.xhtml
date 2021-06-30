@@ -29,7 +29,9 @@
                             <p:outputLabel for="@next">Sexo</p:outputLabel>
                             <p:selectOneMenu id="sexo" required="true"
                                          value="#{manageEstudiantesBean.selectedEstudiantes.gender.codGender}">
-                                <f:selectItems value="#{manageEstudiantesBean.lista1}" var="gender" itemLabel="#{gender.gender}" itemValue="#{gender.codGender}"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="Femenino" itemValue="2"/>
+                                <f:selectItem itemLabel="Masculino" itemValue="1"/>
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
@@ -39,7 +41,16 @@
                             <p:selectOneMenu id="municipio" required="true"
                                          value="#{manageEstudiantesBean.selectedEstudiantes.municipality.codMunicipality}"
                                          validatorMessage="Seleccione un municipio">/>
-                                <f:selectItems value="#{manageEstudiantesBean.lista2}" var="mun" itemLabel="#{mun.municipality}" itemValue="#{mun.codMunicipality}"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="Playa" itemValue="9"/>
+                                <f:selectItem itemLabel="Cerro" itemValue="4"/>
+                                <f:selectItem itemLabel="Boyeros" itemValue="5"/>
+                                <f:selectItem itemLabel="Marianao" itemValue="6"/>
+                                <f:selectItem itemLabel="La Lisa" itemValue="8"/>
+                                <f:selectItem itemLabel="Cotorro" itemValue="1"/>
+                                <f:selectItem itemLabel="H.Vieja" itemValue="2"/>
+                                <f:selectItem itemLabel="C.Habana" itemValue="3"/>
+                                <f:selectItem itemLabel="San Miguel" itemValue="7"/>
 
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>

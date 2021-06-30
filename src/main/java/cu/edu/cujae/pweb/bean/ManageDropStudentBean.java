@@ -48,8 +48,8 @@ public class ManageDropStudentBean {
     public String saveDropStudent() {
         String result=null;
         if (this.selectedDropStudent.getReasonDrop().getCodReason()==0){
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_baja_error");}
-        else if (this.selectedDropStudent.getStudent().getCodStudent() == 0) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_baja_error");
+        } else if (this.selectedDropStudent.getStudent().getCodStudent() == 0) {
 
             //register dropStudent
             this.selectedDropStudent.getStudent().setCodStudent(this.selectedStudent.getCodStudent());
