@@ -32,6 +32,7 @@ public class ManageEstudiantesBean {
     private List<StudentDto> estudiantes;
     private GroupDto grupo;
     private List<GroupDto>combobox;
+    private List<StudentDto> lista;
 
 
 
@@ -70,6 +71,8 @@ public class ManageEstudiantesBean {
             //register student
             estudiantesService.createEstudiantes(this.selectedEstudiantes);
             //register record
+            lista=estudiantesService.getEstudiantes();
+            selectedEstudiantes.setCodStudent(lista.get(lista.size()-1).getCodStudent());
             recordService.createRecord(new RecordDto(this.grupo,this.selectedEstudiantes));
 
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_added");
