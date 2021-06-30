@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,12 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
 
-import cu.edu.cujae.pweb.dto.DropStudentDto;
-import cu.edu.cujae.pweb.dto.GenderDto;
-import cu.edu.cujae.pweb.dto.MunicipalityDto;
-import cu.edu.cujae.pweb.dto.StudentDto;
+import cu.edu.cujae.pweb.dto.*;
 import cu.edu.cujae.pweb.service.DropStudentService;
 import cu.edu.cujae.pweb.service.EstudiantesService;
+import cu.edu.cujae.pweb.service.GroupService;
+import cu.edu.cujae.pweb.service.RecordService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,9 @@ public class ManageEstudiantesBean {
     private StudentDto estudiantesDto;
     private StudentDto selectedEstudiantes;
     private List<StudentDto> estudiantes;
-
+    private GroupDto grupo;
+    private List<GroupDto>combobox;
+    private List<StudentDto> lista;
 
 
 
@@ -38,7 +40,10 @@ public class ManageEstudiantesBean {
     private EstudiantesService estudiantesService;
     @Autowired
     private DropStudentService dropStudentService;
-
+    @Autowired
+    private RecordService recordService;
+    @Autowired
+    private GroupService groupService;
 
     public ManageEstudiantesBean() {
 
@@ -51,11 +56,13 @@ public class ManageEstudiantesBean {
         this.selectedEstudiantes = new StudentDto();
         this.selectedEstudiantes.setGender(new GenderDto());
         this.selectedEstudiantes.setMunicipality(new MunicipalityDto());
+        this.grupo=new GroupDto();
+        this.grupo.setYear(new YearDto());
     }
 
 
     public void openForEdit() {
-
+      this.grupo=estudiantesService.getGroupByStudent(this.selectedEstudiantes.getCodStudent());
     }
 
     public void saveEstudiantes() {
@@ -63,12 +70,18 @@ public class ManageEstudiantesBean {
 
             //register student
             estudiantesService.createEstudiantes(this.selectedEstudiantes);
+            //register record
+            lista=estudiantesService.getEstudiantes();
+            selectedEstudiantes.setCodStudent(lista.get(lista.size()-1).getCodStudent());
+            recordService.createRecord(new RecordDto(this.grupo,this.selectedEstudiantes));
 
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_added");
         } else {
             //edit student
-
             estudiantesService.updateEstudiantes(this.selectedEstudiantes);
+            //edit record
+            recordService.updateRecord(new RecordDto(this.grupo,this.selectedEstudiantes));
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_estudiantes_edited");
         }
 
@@ -127,4 +140,19 @@ public class ManageEstudiantesBean {
         this.estudiantesService = estudiantesService;
     }
 
+    public GroupDto getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(GroupDto grupo) {
+        this.grupo = grupo;
+    }
+    public List<GroupDto> getCombobox() throws SQLException {
+        combobox=groupService.getGroupsLastCourse();
+        return combobox;
+    }
+
+    public void setCombobox(List<GroupDto> combobox) {
+        this.combobox = combobox;
+    }
 }
