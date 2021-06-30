@@ -7,15 +7,18 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Estudiante Baja
+        Baja de Estudiante
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
             <div class="card crud-demo">
+                <p:panelGrid columns="1" layout="grid">
                 <p:growl id="message" showDetail="true"/>
                 <div> <p:outputLabel >Ya este estudiante se le ha dado de baja </p:outputLabel></div>
+                </p:panelGrid>
 
-                <p:commandButton value="Continuar" update="message" styleClass="p-mr-2" icon="pi pi-check">
+                <h:panelGroup>
+                <p:commandButton value="Continuar" action="atras" update="message" style="margin-right:1.5rem" styleClass="p-mr-2" icon="pi pi-check">
                 </p:commandButton>
 
                 <p:commandButton value="Eliminar de Baja" action="#{manageDropStudentBean.deleteEstudiantes}"  update="message" styleClass="ui-button-danger" icon="pi pi-times">
@@ -26,6 +29,7 @@
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
+                </h:panelGroup>
             </div>
         </h:form>
     </ui:define>
