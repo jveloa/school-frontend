@@ -21,6 +21,7 @@ import java.util.List;
 public class ManageGroupBean {
     private GroupDto selectedGroup;
     private List<GroupDto> groups;
+    private List<GroupDto>combox;
 
     @Autowired
     private GroupService groupService;
@@ -76,6 +77,8 @@ public class ManageGroupBean {
 
     }
 
+
+
     public void getNumGroupAndCodYear(int numYear) throws SQLException {
 
     }
@@ -102,5 +105,14 @@ public class ManageGroupBean {
 
     public void setGroupService(GroupService groupService) {
         this.groupService = groupService;
+    }
+
+    public List<GroupDto> getCombox() throws SQLException {
+        combox=groupService.getGroupsLastCourse();
+        return combox;
+    }
+
+    public void setCombox(List<GroupDto> combox) {
+        this.combox = combox;
     }
 }

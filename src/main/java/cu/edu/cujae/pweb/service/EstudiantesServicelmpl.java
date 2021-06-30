@@ -3,6 +3,7 @@ package cu.edu.cujae.pweb.service;
 
 
 
+import cu.edu.cujae.pweb.dto.GroupDto;
 import cu.edu.cujae.pweb.dto.StudentDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -73,6 +74,24 @@ public class EstudiantesServicelmpl implements EstudiantesService{
         UriTemplate template = new UriTemplate("/api/v1/students/{codStudent}");
         String uri = template.expand(codStudent).toString();
         restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+    }
+    @Override
+    public GroupDto getGroupByStudent(int codEst) {
+
+        GroupDto group = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<GroupDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/students/group/{codStudent}");
+            String uri = template.expand(codEst).toString();
+            String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            group = apiRestMapper.mapOne(response, GroupDto.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return group;
     }
 
 

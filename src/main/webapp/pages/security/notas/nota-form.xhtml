@@ -17,10 +17,8 @@
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250"
-                            disabled="#{manageNotaBean.selectedNota.subject.codSubject!=0}"
-                            >
+                                    disabled="#{manageNotaBean.selectedNota.subject.codSubject!=0}">
                                 <f:selectItems value="#{manageNotaBean.subjectsNotEvaluatedByStudent}" var="subjects" itemLabel="#{subjects.nameSubject}" itemValue="#{subjects.codSubject}"/>
-
                             </p:selectOneMenu>
                         </div>
 
