@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import javax.faces.view.ViewScoped;
 import cu.edu.cujae.pweb.dto.*;
 import cu.edu.cujae.pweb.service.DropStudentService;
 import cu.edu.cujae.pweb.service.EstudiantesService;
+import cu.edu.cujae.pweb.service.GroupService;
 import cu.edu.cujae.pweb.service.RecordService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class ManageEstudiantesBean {
     private StudentDto selectedEstudiantes;
     private List<StudentDto> estudiantes;
     private GroupDto grupo;
+    private List<GroupDto>combobox;
 
 
 
@@ -38,6 +41,8 @@ public class ManageEstudiantesBean {
     private DropStudentService dropStudentService;
     @Autowired
     private RecordService recordService;
+    @Autowired
+    private GroupService groupService;
 
     public ManageEstudiantesBean() {
 
@@ -138,5 +143,13 @@ public class ManageEstudiantesBean {
 
     public void setGrupo(GroupDto grupo) {
         this.grupo = grupo;
+    }
+    public List<GroupDto> getCombobox() throws SQLException {
+        combobox=groupService.getGroupsLastCourse();
+        return combobox;
+    }
+
+    public void setCombobox(List<GroupDto> combobox) {
+        this.combobox = combobox;
     }
 }
