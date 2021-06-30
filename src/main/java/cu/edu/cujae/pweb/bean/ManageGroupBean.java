@@ -24,6 +24,7 @@ public class ManageGroupBean {
     private List<GroupDto> groups;
     private List<Integer> yearNumbers;
 
+
     @Autowired
     private GroupService groupService;
 
@@ -124,4 +125,6 @@ public class ManageGroupBean {
     public void setYearNumbers(List<Integer> yearNumbers) {
         this.yearNumbers = yearNumbers;
     }
+
+
 }
