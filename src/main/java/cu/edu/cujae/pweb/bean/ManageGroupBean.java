@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -21,10 +22,11 @@ import java.util.List;
 public class ManageGroupBean {
     private GroupDto selectedGroup;
     private List<GroupDto> groups;
-    private List<GroupDto>combox;
+    private List<Integer> yearNumbers;
 
     @Autowired
     private GroupService groupService;
+
 
 
     public ManageGroupBean() {
@@ -64,12 +66,18 @@ public class ManageGroupBean {
 
     public void deleteGroup() throws SQLException {
         try {
-            groupService.deleteGroup(this.selectedGroup.getCodGroup());
-            this.selectedGroup = null;
-            groups = groupService.getGroupsLastCourse();
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_deleted");
-            PrimeFaces.current().ajax().update("form:dt-group");
+            if(!groupService.isAssignmentsGroup(this.selectedGroup.getCodGroup())){
+                groupService.deleteGroup(this.selectedGroup.getCodGroup());
+                this.selectedGroup = null;
+                groups = groupService.getGroupsLastCourse();
+
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_deleted");
+                PrimeFaces.current().ajax().update("form:dt-group");
+            }else{
+                JsfUtils.addMessageFromBundle(null,FacesMessage.SEVERITY_WARN,"message_group_is_assignments");
+            }
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
             e.printStackTrace();
@@ -78,10 +86,6 @@ public class ManageGroupBean {
     }
 
 
-
-    public void getNumGroupAndCodYear(int numYear) throws SQLException {
-
-    }
 
     public GroupDto getSelectedGroup() {
         return selectedGroup;
@@ -107,12 +111,17 @@ public class ManageGroupBean {
         this.groupService = groupService;
     }
 
-    public List<GroupDto> getCombox() throws SQLException {
-        combox=groupService.getGroupsLastCourse();
-        return combox;
+    public List<Integer> getYearNumbers() throws SQLException {
+        List<Integer> intList = new ArrayList<>();
+        for (GroupDto group: groupService.getGroupsLastCourse()) {
+            if(!intList.contains(group.getYear().getYearNumber())){
+                intList.add(group.getYear().getYearNumber());
+            }
+        }
+        return intList;
     }
 
-    public void setCombox(List<GroupDto> combox) {
-        this.combox = combox;
+    public void setYearNumbers(List<Integer> yearNumbers) {
+        this.yearNumbers = yearNumbers;
     }
 }

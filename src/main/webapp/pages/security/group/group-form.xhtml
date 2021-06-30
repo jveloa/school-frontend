@@ -15,10 +15,8 @@
                             <p:outputLabel for="@next">Year</p:outputLabel>
                             <p:selectOneMenu id="year" required="true"
                                              value="#{manageGroupBean.selectedGroup.year.yearNumber}">
-                                <f:selectItem itemLabel="1ro" itemValue="1"/>
-                                <f:selectItem itemLabel="2do" itemValue="2"/>
-                                <f:selectItem itemLabel="3ro" itemValue="3"/>
-                                <f:selectItem itemLabel="4to" itemValue="4"/>
+    
+                                <f:selectItems value="#{manageGroupBean.yearNumbers}" var="year" itemLabel="#{year}" itemValue="#{year}"/>
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
