@@ -15,9 +15,6 @@ public class StudentLadderDto {
         this.avg = avg;
     }
 
-    public StudentLadderDto() {
-    }
-
     public double getAvg() {
         return avg;
     }

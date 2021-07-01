@@ -29,12 +29,13 @@ public class ManageGroupBean {
     private GroupService groupService;
 
 
-
     public ManageGroupBean() {
+            openNew();
     }
 
 
     public void openNew() {
+
         this.selectedGroup = new GroupDto();
     }
 
@@ -100,17 +101,11 @@ public class ManageGroupBean {
         return groupService.getGroupsLastCourse();
     }
 
+
     public void setGroups(List<GroupDto> groups) {
         this.groups = groups;
     }
 
-    public GroupService getGroupService() {
-        return groupService;
-    }
-
-    public void setGroupService(GroupService groupService) {
-        this.groupService = groupService;
-    }
 
     public List<Integer> getYearNumbers() throws SQLException {
         List<Integer> intList = new ArrayList<>();

@@ -8,6 +8,9 @@ public class StudentsByGroupDto {
     private int numberGroup;
     private int codStudent;
 
+    public StudentsByGroupDto() {
+    }
+
     public StudentsByGroupDto(String course, int yearNumber, String name, String lastName, int numberGroup, int codStudent) {
         this.course = course;
         this.yearNumber = yearNumber;
@@ -15,9 +18,6 @@ public class StudentsByGroupDto {
         this.lastName = lastName;
         this.numberGroup = numberGroup;
         this.codStudent = codStudent;
-    }
-
-    public StudentsByGroupDto() {
     }
 
     public String getCourse() {
